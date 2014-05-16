@@ -26,6 +26,37 @@ class BackEnd extends AB_Controller {
 		$this->load->view('master/master',
 				array('pageContent'=>$pageContent));
 	}
+	public function getDegree(){
+		$res = $this->sp('GetDegree');
+		$data = $res -> result();
+		$this->load->view('json_view', array('json' => $data));
+   }
+
+   	public function changeDegree(){
+   		$post = $this->rest->post();
+   		if($post->DegreeID == -1)
+			$res = $this->sp('insertDegree', 
+				array('DegreeName' => $post->DegreeName,
+					'AuditedUser' => 'Angela'
+			));
+		else 
+			$res = $this->sp('EditDegree', 
+				array('DegreeID' => $post->DegreeID,
+					'DegreeName' => $post->DegreeName,
+					'AuditedUser' => 'Angela'
+			));
+		$data = $res->result();
+		$this->load->view('json_view', array('json' => $data));
+   }
+    public function deleteDegree(){
+   		$post = $this->rest->post();
+		$res = $this->sp('DeleteDegree', 
+				array('DegreeID' => $post->DegreeID,
+					'AuditedUser' => 'Angela'
+			));
+		$data = $res->result();
+		$this->load->view('json_view', array('json' => $data));
+   }
 }
 
 /* End of file welcome.php */
