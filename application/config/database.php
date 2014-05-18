@@ -49,7 +49,7 @@ $active_group = 'default';
 $active_record = TRUE;
 
 //Dummy
-
+$db['default']['hostname'] = 'HP-PC\SQLEXPRESS'; 
 $db['default']['database'] = 'ujianonline';
 $db['default']['dbdriver'] = 'sqlsrv';
 $db['default']['dbprefix'] = '';

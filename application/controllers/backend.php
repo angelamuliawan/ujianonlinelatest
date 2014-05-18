@@ -31,6 +31,11 @@ class BackEnd extends AB_Controller {
 		$data = $res -> result();
 		$this->load->view('json_view', array('json' => $data));
    }
+   	public function getLevel(){
+		$res = $this->sp('GetLevel');
+		$data = $res -> result();
+		$this->load->view('json_view', array('json' => $data));
+   }
 
    	public function changeDegree(){
    		$post = $this->rest->post();
@@ -48,10 +53,38 @@ class BackEnd extends AB_Controller {
 		$data = $res->result();
 		$this->load->view('json_view', array('json' => $data));
    }
+
+    public function changeLevel(){
+   		$post = $this->rest->post();
+   		if($post->LevelID == -1)
+			$res = $this->sp('InsertLevel', 
+				array('LevelName' => $post->LevelName,
+					'AuditedUser' => 'Angela'
+			));
+		else 
+			$res = $this->sp('EditLevel', 
+				array('LevelID' => $post->LevelID,
+					'LevelName' => $post->LevelName,
+					'AuditedUser' => 'Angela'
+			));
+		$data = $res->result();
+		$this->load->view('json_view', array('json' => $data));
+   }
+
     public function deleteDegree(){
    		$post = $this->rest->post();
 		$res = $this->sp('DeleteDegree', 
 				array('DegreeID' => $post->DegreeID,
+					'AuditedUser' => 'Angela'
+			));
+		$data = $res->result();
+		$this->load->view('json_view', array('json' => $data));
+   }
+
+    public function deleteLevel(){
+   		$post = $this->rest->post();
+		$res = $this->sp('DeleteLevel', 
+				array('LevelID' => $post->LevelID,
 					'AuditedUser' => 'Angela'
 			));
 		$data = $res->result();

@@ -31,6 +31,7 @@
 	<script src="<?=$domain?>/packaged/javascript/jquery.js"></script>
 	<script src="<?=$domain?>/packaged/javascript/homepage.js"></script>
 	<script src="<?=$domain?>/packaged/javascript/semantic.js"></script>
+  <script src="<?=$domain?>/packaged/javascript/jquery.address.js"></script>
   <script src="<?=$domain?>/packaged/javascript/core/ab-engine.js"></script>
   <script>
     $(document).ready(function() {
