@@ -94,7 +94,7 @@ GO
 -- Create date: 16 Mei 2014
 -- Description:	EDIT Degree
 -- =============================================
-ALTER PROCEDURE [dbo].[DeleteDegree]
+CREATE PROCEDURE [dbo].[DeleteDegree]
 	-- Add the parameters for the stored procedure here
 	@DegreeID int,
 	@AuditedUser varchar(20)
@@ -120,7 +120,7 @@ END
 -- Create date: 16 Mei 2014
 -- Description:	EDIT Degree
 -- =============================================
-ALTER PROCEDURE [dbo].[EditDegree]
+CREATE PROCEDURE [dbo].[EditDegree]
 	-- Add the parameters for the stored procedure here
 	@DegreeID int,
 	@DegreeName varchar(50),
@@ -167,7 +167,7 @@ END
 -- Create date: 16 Mei 2014
 -- Description:	Insert Degree
 -- =============================================
-ALTER PROCEDURE [dbo].[InsertDegree]
+CREATE PROCEDURE [dbo].[InsertDegree]
 	-- Add the parameters for the stored procedure here
 	@DegreeName varchar(50),
 	@AuditedUser varchar(20)
