@@ -22,7 +22,7 @@ GO
 -- Create date: 18 Mei 2014
 -- Description:	Insert Level
 -- =============================================
-CREATE PROCEDURE [dbo].[InsertLevel]
+ALTER PROCEDURE [dbo].[InsertLevel]
 	-- Add the parameters for the stored procedure here
 	@LevelName varchar(50),
 	@AuditedUser varchar(20)

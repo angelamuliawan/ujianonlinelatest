@@ -28,6 +28,21 @@ class Register extends AB_Controller {
 		$this->load->view('master/master',
 				array('pageContent'=>$pageContent));
 	}
+	public function insertuser()
+	{
+		$post = $this->rest->post();
+		$res = $this->sp('InsertUser', 
+			array('UserName'=> $post->username, 
+					'FullName' => $post->fullname,
+					'UserPhoto' => $post->photo ,
+					'Password'=> sha1($post->password),
+					'Email'=> $post->email, 
+					'UserType'=> $post->usertype, 
+					'AuditedUser'=> 'Angela' 
+		));
+		$data = $res->result();
+		$this->load->view('json_view', array('json' => $data));
+	}
 }
 
 /* End of file welcome.php */
