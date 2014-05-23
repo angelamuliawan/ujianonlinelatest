@@ -33,7 +33,8 @@ class General extends AB_Controller {
 		}
 		else
 		{
-			$data = array('upload_data' => $this->upload->data());
+			$data = array('upload_data' => $
+				-->upload->data());
 
 			//crop image
 			$config['image_library'] = 'gd2';

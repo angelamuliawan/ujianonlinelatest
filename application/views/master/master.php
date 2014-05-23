@@ -34,6 +34,8 @@
   <script src="<?=$domain?>/packaged/javascript/ajaxfileupload/ajaxfileupload.js"></script>
   <script src="<?=$domain?>/packaged/javascript/jquery.address.js"></script>
   <script src="<?=$domain?>/packaged/javascript/core/ab-engine.js"></script>
+
+ <script src="<?=$domain?>/packaged/javascript/ContentJS/home.js"></script>
   <script>
     $(document).ready(function() {
       $('.sidemenu.sidebar').first().sidebar('attach events', '.toggle.button');
@@ -43,9 +45,9 @@
 
       $('.loginmodal.modal').modal('attach events', '.openmodal', 'show');
 
-
+      //to hide fixed bar menu in home
       var pathname = window.location.pathname;
-      var page = pathname.split('/ujianonline/');
+      var page = pathname.split('/ujianonlinelatest/');
       if(page[1] == '' || page[1] == 'home') $(".fixedmenu").hide();
       else $(".fixedmenu").show();
 
@@ -100,9 +102,15 @@
       <a class="right launch item">
           What is BAZ?
       </a>
-      <a class="right launch item openmodal">
-          Login
+      <?php if($this->session->userdata('loggedin')!=NULL) { ?>
+      <a class="right launch item btnLogout">
+          <?=$this->session->userdata('username')?>, Logout
       </a>
+      <?php } else {?>
+      <a class="right launch item openmodal">
+         Login
+      </a>
+      <?php } ?>
     </div>
   </div>
   <!-- End of Fixed Menu -->
@@ -116,12 +124,14 @@
 
   <!--Start Of Sidebar -->
   <div class="ui floating thin sidebar sidemenu">
+    <?php if($this->session->userdata('loggedin')!=NULL) { ?>
     <div class="ui secondary vertical menu" style="padding-top:4px;">
       <a href="#" class="item">My Dashboard</a>
       <a href="#" class="item">Create Test</a>
       <a href="#" class="item">My Creation Test</a>
       <a href="#" class="item">My Passed Test</a>
     </div>
+    <?php } ?>
     <div class="ui icon input" style="margin:10px;">
       <input placeholder="Search Category..." type="text">
       <i class="inverted search icon"></i>
@@ -167,11 +177,11 @@
   <i class="close icon"></i>
 <div class="ui two column middle aligned relaxed grid basic segment">
   <div class="column">
-    <div class="ui form segment">
+    <div class="ui form segment" id="formLogin">
       <div class="field">
         <label>Username</label>
         <div class="ui left labeled icon input">
-          <input placeholder="Username" type="text">
+          <input placeholder="Username" type="text" id="loginusername">
           <i class="user icon"></i>
           <div class="ui corner label">
             <i class="asterisk icon"></i>
@@ -181,14 +191,17 @@
       <div class="field">
         <label>Password</label>
         <div class="ui left labeled icon input">
-          <input type="password" placeholder="Password">
+          <input type="password" placeholder="Password" id="loginpassword">
           <i class="lock icon"></i>
           <div class="ui corner label">
             <i class="asterisk icon"></i>
           </div>
         </div>
       </div>
-      <div class="ui blue submit button">Login</div>
+      <div class="field">
+        <label style="color:red" id="errorLogin"></label>
+      </div>
+      <div class="ui blue submit button" id="btnLogin">Login</div>
     </div>
   </div>
   <div class="ui vertical divider">

@@ -12,10 +12,17 @@
           BAZ Online Exam
         </h1>
         <p>You're best partner to customize and manage online test</p>
-        <div class="large basic inverted animated fade ui openmodal button">
-          <div class="visible content">Login</div>
-          <div class="hidden content">Register</div>
+        <?php if($this->session->userdata('loggedin')!=NULL) { ?>
+        <div class="large basic inverted animated fade ui button btnLogout">
+          <div class="visible content"><?=$this->session->userdata('username')?>, Logout</div>
+          <div class="hidden content">Logout</div>
         </div>
+        <?php }  else{ ?>
+        <div class="large basic inverted animated fade ui openmodal button">
+     		<div class="visible content">Login</div>
+          	<div class="hidden content">Register</div>
+        </div>
+        <?php } ?>
         <div class="large basic inverted animated fade ui button">
           <div class="visible content">What is BAZ</div>
           <div class="hidden content">?</div>

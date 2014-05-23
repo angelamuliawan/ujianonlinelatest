@@ -26,6 +26,29 @@ class Home extends AB_Controller {
 		$this->load->view('master/master',
 				array('pageContent'=>$pageContent));
 	}
+	public function doLogin()
+	{
+		$post = $this->rest->post();
+		$res = $this->sp('CheckLogin', 
+			array('UserName'=> $post->username, 
+				'Password' => sha1($post->password)
+		));
+		$data = $res->result();
+		if($data[0]->UserID != -1)
+		{
+			$this->session->set_userdata('loggedin',true);
+			$this->session->set_userdata('userid',$data[0]->UserID);
+			$this->session->set_userdata('username',$data[0]->UserName);
+			$this->session->set_userdata('usertype',$data[0]->UserType);
+			$this->session->set_userdata('userrole',$data[0]->Role);
+		}
+		return $this->load->view('json_view', array('json' => $data));
+	}
+	public function doLogout(){
+		$this->load->helper('url');
+		$this->session->sess_destroy();
+		redirect('home');
+	}
 }
 
 /* End of file welcome.php */
