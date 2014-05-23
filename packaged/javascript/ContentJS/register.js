@@ -21,24 +21,109 @@ $(document).ready(function(){
 	    	  	//$(".preloader").trigger("ajaxComplete");
 	      }});
 
+	$('#formRegister').form({
+		username: {
+	      identifier : 'username',
+	      rules: [
+	        {
+	          type   : 'empty',
+	          prompt : 'Please enter a username',
+	        }
+	      ]
+	    },
+	    fullname: {
+	      identifier : 'fullname',
+	      rules: [
+	        {
+	          type   : 'empty',
+	          prompt : 'Please enter a full name'
+	        }
+	      ]
+	    },
+	    password: {
+	      identifier : 'password',
+	      rules: [
+	        {
+	          type   : 'empty',
+	          prompt : 'Please enter a password'
+	        },
+	        {
+	          type   : 'length[4]',
+	          prompt : 'Your password must be at least 6 characters'
+	        }
+	      ]
+	    },
+	    passwordConfirm: {
+	      identifier : 'confirmpassword',
+	      rules: [
+	        {
+	          type   : 'empty',
+	          prompt : 'Please confirm your password'
+	        },
+	        {
+	          type   : 'match[password]',
+	          prompt : 'Password doesn\'t match'
+	        }
+	      ]
+	    },
+	    email: {
+	      identifier : 'email',
+	      rules: [
+	        {
+	          type   : 'empty',
+	          prompt : 'Please enter your email'
+	        },
+	        {
+	          type   : 'email',
+	          prompt : 'Please enter a valid email address'
+	        }
+	      ]
+	    },
+	    usertype: {
+	      identifier : 'usertype',
+	      rules: [
+	        {
+	          type   : 'empty',
+	          prompt : 'Please enter your type'
+	        }
+	      ]
+	    },
+		terms: {
+	      identifier : 'agreed',
+	      rules: [
+	        {
+	          type   : 'checked',
+	          prompt : 'You must agree to the terms and conditions'
+	        }
+	      ]
+	    }
+	},{
+	    inline : true,
+	    on     : 'blur'
+	});
+
 	$("#btnRegister").click(function(){
-		var registerdata ={
-			username : $("#username").val(),
-			photo : $("#registeredPhoto").val(),
-			fullname : $("#fullname").val(),
-			password : $("#password").val(),
-			email : $("#email").val(),
-			usertype : $("#usertype").val(),
-			agreed : $("#agreed").val(),
+		if(!($('#formRegister .field').hasClass('error')))
+		{
+			var registerdata ={
+				username : $("#username").val(),
+				photo : $("#registeredPhoto").val(),
+				fullname : $("#fullname").val(),
+				password : $("#password").val(),
+				email : $("#email").val(),
+				usertype : $("#usertype").val(),
+				agreed : $("#agreed").val(),
+			}
+			AB.ajax({
+				url: AB.serviceUri + 'register/insertuser',
+				type: 'post',
+				dataType: 'json',
+				data:JSON.stringify(registerdata),
+				contentType: 'application/json;charset=utf-8',
+				success:function(data){
+					
+				}	
+			});
 		}
-		AB.ajax({
-			url: AB.serviceUri + 'register/insertuser',
-			type: 'post',
-			dataType: 'json',
-			data:JSON.stringify(registerdata),
-			contentType: 'application/json;charset=utf-8',
-			success:function(data){
-			}	
-		});
 	});
 })

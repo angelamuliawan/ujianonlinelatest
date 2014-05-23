@@ -29,12 +29,20 @@
 		          <input placeholder="Type your fullname here..." type="text" name="fullname" id="fullname">
 		        </div>
 		    </div>
-		    <div class="field">
-		        <label>Password</label>
-		        <div class="ui left labeled input">
-		          <input type="password" placeholder="Type your password here..." name="password" id="password">
-		        </div>
-		    </div>
+		    <div class="two fields">
+			    <div class="field">
+			        <label>Password</label>
+			        <div class="ui left labeled input">
+			          <input type="password" placeholder="Type your password here..." name="password" id="password">
+			        </div>
+			    </div>
+			    <div class="field">
+			        <label>Confirm Password</label>
+			        <div class="ui left labeled input">
+			          <input type="password" placeholder="Confirm your password here..." name="confirmpassword" id="confirmpassword">
+			        </div>
+			    </div>
+			</div>
 		    <div class="field">
 		        <label>Email</label>
 		        <div class="ui left labeled input">
@@ -44,7 +52,7 @@
 		    <div class="field">
 		        <label>User Type</label>
 		        <div class="ui fluid selection dropdown">
-					<div class="text">Select</div>
+					<div class="default text">Select</div>
 					<i class="dropdown icon"></i>
 					<input type="hidden" name="usertype" id="usertype">
 					<div class="menu">

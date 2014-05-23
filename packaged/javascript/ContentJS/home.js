@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
 	$('#formLogin').form({
 	username: {
       identifier : 'loginusername',
