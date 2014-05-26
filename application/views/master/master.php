@@ -130,6 +130,9 @@
       <a href="#" class="item">Create Test</a>
       <a href="#" class="item">My Creation Test</a>
       <a href="#" class="item">My Passed Test</a>
+      <?php if($this->session->userdata('userrole')==1) { ?>
+      <a href="#" class="item">Manage Content</a>
+      <?php } ?>
     </div>
     <?php } ?>
     <div class="ui icon input" style="margin:10px;">
