@@ -3,7 +3,7 @@
 -- Create date: 21 Mei 2014
 -- Description:	Insert User
 -- =============================================
-ALTER PROCEDURE [dbo].[InsertUser]
+CREATE PROCEDURE [dbo].[InsertUser]
 	-- Add the parameters for the stored procedure here
 	@UserName varchar(20), 
 	@FullName varchar(100),

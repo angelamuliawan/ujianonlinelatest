@@ -43,7 +43,7 @@
 
       $('.ui.accordion').accordion();
 
-      $('.loginmodal.modal').modal('attach events', '.openmodal', 'show');
+     $('.loginmodal.modal').modal('attach events', '.openmodal', 'show');
 
       //to hide fixed bar menu in home
       var pathname = window.location.pathname;
@@ -131,7 +131,7 @@
       <a href="#" class="item">My Creation Test</a>
       <a href="#" class="item">My Passed Test</a>
       <?php if($this->session->userdata('userrole')==1) { ?>
-      <a href="#" class="item">Manage Content</a>
+      <a href="<?=$domain?>/backend" class="item">Manage Content</a>
       <?php } ?>
     </div>
     <?php } ?>

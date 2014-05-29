@@ -1,4 +1,9 @@
+<?php
+	$domain = $this->config->item('domain');
+	//date_default_timezone_set($this->config->item('timezone'));
+?>
 <script src="<?=$domain?>/packaged/javascript/ContentJS/backend.js"></script>
+
 <div class="segment">
 	<div class="container">
 		<!-- Title -->
@@ -63,7 +68,42 @@
 			<!--End Of Degree Section-->
 		</div>
 		<div class="ui tab segment" data-tab="category">
+			<!--Category Section-->
+		  	<h4>Degree</h4>
+			 <!--Table -->
+			 <table class="ui table segment" id="tblCategory" width="50">
+			  	<thead>
+				    <tr>
+				    	<th>Category Name</th>
+				    	<th>Degree</th>
+					    <th>Action</th>
+				  	</tr>
+				</thead>
+				<tbody>
+					<tr id="iTemplateCat"style="display:none" class="loop">
+						<td class="iCategoryID" style="display:none"></td>
+						<td class="iCategoryName"></td>
+						<td class="iDegreeCat">
+							<div class="ui fluid selection dropdown" id="degreecat">
+								<div class="default text">Select</div>
+								<i class="dropdown icon"></i>
+								<input type="hidden" name="degreecat">
+								<div class="menu">
+									<div class="item" data-value="individu">Individual</div>
+									<div class="item" data-value="company">Company</div>
+								</div>
+					    	</div>
 
+						</td>
+						<td class="iActionCat">
+							<i class="edit icon btnEditCategory link" ></i>
+							<i class="trash icon btnDeleteCategory link"></i>
+						</td>
+					</tr>
+				 </tbody>
+			</table>
+			<!-- End Of Table -->
+			<!--End Of Category Section-->
 		</div>
 		<div class="ui tab segment" data-tab="user">
 

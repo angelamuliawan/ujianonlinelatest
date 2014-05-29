@@ -1,7 +1,10 @@
+var ddlDegree = [];
 $(document).ready(function(){
 	loadDegree();
 	loadLevel();
+	loadCategory();
 
+	$('.ui.selection.dropdown').dropdown();
 	$('.demo.menu .item').tab(); //to activate the tab menu
 
 	/*Start Of Degree*/
@@ -97,12 +100,23 @@ function loadDegree(){
 				$(".iDegreeID",newRow).text(data[i].DegreeID);
 				$(".iDegreeName",newRow).text(data[i].DegreeName);
 				$("tbody",table).append(newRow);
+
+				//to fill dropdown in loadCategory()
+				//ddlDegree.push({value:data[i].DegreeID, text:data[i].DegreeName});
+				/*for(var j =0; j<ddlDegree.length; j++)
+				{
+					$(".menu .ddlCat").append(
+						'<div class="item" data-value="'+ddlDegree[j].value+'">'+ddlDegree.text+'</div>'
+					);
+				}*/
 			}
 			var tmp = $("#iTemplateDeg").clone().css("display", "").removeAttr("id").removeClass("loop").addClass("datarow");
 			$(".iDegreeID",tmp).text('-1');
 			$(".iDegreeName",tmp).append("<div class='ui input'><input type='text' class='txtDegree' placeholder='Input New Degree' /></div>");
 			$(".iAction",tmp).empty().append("<i class='add icon btnAddDegree link'></i>");
 			$("#tblDegree tbody").append(tmp);
+
+
 		}
 	});
 }
@@ -128,6 +142,33 @@ function loadLevel(){
 			$(".iLevelName",tmp).append("<div class='ui input'><input type='text' class='txtLevel' placeholder='Input New Level' /></div>");
 			$(".iAction",tmp).empty().append("<i class='add icon btnAddLevel link'></i>");
 			$("#tblLevel tbody").append(tmp);
+		}
+	});
+}
+
+function loadCategory(){
+	AB.ajax({
+		url: AB.serviceUri + 'backend/getCategory',
+		type: 'post',
+		dataType: 'json',
+		contentType: 'application/json;charset=utf-8',
+		success:function(data){
+			var table = $("#tblCategory");
+			$("tbody",table).find("tr").not("#iTemplateCat").remove();
+			for(var i = 0; i<data.length; i++)
+			{
+				var newRow = $("#iTemplateCat",table).clone().css("display","").removeAttr("id");
+				$(".iCategoryID",newRow).text(data[i].CategoryID);
+				$(".iCategoryName",newRow).text(data[i].CategoryName);
+				//$(".iDegreeCat",newRow).text(data[i].DegreeID);
+				$("tbody",table).append(newRow);
+			}
+			var tmp = $("#iTemplateCat").clone().css("display", "").removeAttr("id").removeClass("loop").addClass("datarow");
+			$(".iCategoryID",tmp).text('-1');
+			$(".iCategoryName",tmp).append("<div class='ui input'><input type='text' class='txtCategory' placeholder='Input New Category' /></div>");
+			//$(".iDegreeCat",tmp).text(0);
+			$(".iAction",tmp).empty().append("<i class='add icon btnAddCategory link'></i>");
+			$("#tblCategory tbody").append(tmp);
 		}
 	});
 }

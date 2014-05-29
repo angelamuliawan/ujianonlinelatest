@@ -45,7 +45,7 @@ $(document).ready(function(){
 					else 
 					{
 						$("#errorLogin").text("");
-						window.location.reload();
+						window.location.href= AB.dashboardUri;
 					}
 				}	
 			});

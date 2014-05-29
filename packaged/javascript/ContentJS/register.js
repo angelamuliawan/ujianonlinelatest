@@ -121,7 +121,7 @@ $(document).ready(function(){
 				data:JSON.stringify(registerdata),
 				contentType: 'application/json;charset=utf-8',
 				success:function(data){
-					
+					window.location.href= AB.dashboardUri;
 				}	
 			});
 		}

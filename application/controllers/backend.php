@@ -19,9 +19,6 @@ class BackEnd extends AB_Controller {
 	 */
 	public function index()
 	{
-		//validasi session
-		if($this->session->userdata('loggedin') == NULL) redirect('home');
-
 		$pageContent = $this->load->view('content/backend', '',  TRUE);
 
 		//Load Master View
@@ -30,6 +27,11 @@ class BackEnd extends AB_Controller {
 	}
 	public function getDegree(){
 		$res = $this->sp('GetDegree');
+		$data = $res -> result();
+		$this->load->view('json_view', array('json' => $data));
+   }
+   public function getCategory(){
+		$res = $this->sp('GetCategory');
 		$data = $res -> result();
 		$this->load->view('json_view', array('json' => $data));
    }
