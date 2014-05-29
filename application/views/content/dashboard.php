@@ -6,23 +6,40 @@
 <div class="segment">
 	<div class="container">
 		<!-- Title -->
-		<img class="ui small floated image" id="userimage">
-	 	<h3 class="ui header" id="fullname"></h3>
+	 	<h3 class="ui header">Dashboard</h3>
 	  	<!-- Content -->
 	  	<div class="ui segment">
 			<div class="ui form">
 				<form id="formChangeProfile">
+				<h4 class="ui dividing header">Basic Information</h4>
 					<div class="inline field">
 				        <label style="width:190px;">Username</label>
 				        <input  style="width:300px;" type="text" name="username" id="username" disabled>
 				    </div>
+					<div class="inline field">
+				        <label style="width:190px;">Fullname</label>
+				        <input  style="width:300px;" type="text" name="fullname" id="fullname">
+				    </div>
+					
 				   	 <div class="inline field">
 				        <label style="width:190px;">Email</label>
 				        <input style="width:300px;" type="text" name="email" id="email">
 				    </div>
-				        <div class="inline field">
+				    <div class="inline field">    
+					    <label style="width:190px;">User Photo</label>
+					    <!--<img class="ui small image" id="userimage">-->
+				    </div>
+				    <div class="field">
+				    	<div class="ui blue button small" id="btnChangeProfile">Save</div>
+				    </div>
+			    </form>
+		    </div>
+		    <div class="ui form">
+				<form id="formChangePassword">
+				<h4 class="ui dividing header">Change Password</h4>
+						<div class="inline field">
 					        <label style="width:190px;">Password</label>
-					        <input style="width:300px;" type="password" placeholder="filled to change email or password or both" name="password" id="password">
+					        <input style="width:300px;" type="password" placeholder="filled old password" name="password" id="password">
 					    </div>
 				        <div class="inline field">
 					        <label style="width:190px;">New Password</label>
@@ -32,8 +49,11 @@
 					        <label style="width:190px;">Confirm New Password</label>
 					        <input  style="width:300px;"type="password" placeholder="Retype new password" name="confirmnewpassword" id="confirmnewpassword">
 					    </div>
-			    </form>
-		    </div>
+					    <div class="field">
+					    	<div class="ui blue button small" id="btnChangePassword">Change Password</div>
+						</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
