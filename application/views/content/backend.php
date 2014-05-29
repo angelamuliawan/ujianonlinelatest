@@ -1,8 +1,4 @@
-<?php
-	$domain = $this->config->item('domain');
-	//date_default_timezone_set($this->config->item('timezone'));
-?>
- <script src="<?=$domain?>/packaged/javascript/ContentJS/backend.js"></script>
+<script src="<?=$domain?>/packaged/javascript/ContentJS/backend.js"></script>
 <div class="segment">
 	<div class="container">
 		<!-- Title -->

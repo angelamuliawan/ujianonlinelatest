@@ -19,7 +19,9 @@ class BackEnd extends AB_Controller {
 	 */
 	public function index()
 	{
-		//$this->load->view('master/master');
+		//validasi session
+		if($this->session->userdata('loggedin') == NULL) redirect('home');
+
 		$pageContent = $this->load->view('content/backend', '',  TRUE);
 
 		//Load Master View
