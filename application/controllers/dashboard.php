@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Register extends AB_Controller {
+class Dashboard extends AB_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -19,26 +19,20 @@ class Register extends AB_Controller {
 	 */
 	public function index()
 	{
-		
-		$pageContent = $this->load->view('content/register', '',  TRUE);
+		if($this->session->userdata('loggedin')==NULL) redirect('home');
+		$pageContent = $this->load->view('content/dashboard', '',  TRUE);
 
 		//Load Master View
 		$this->load->view('master/master',
 				array('pageContent'=>$pageContent));
 	}
-	public function insertuser()
+	public function getUserProfile()
 	{
-		$post = $this->rest->post();
-		$res = $this->sp('InsertUser', 
-			array('UserName'=> $post->username, 
-					'FullName' => $post->fullname,
-					'UserPhoto' => $post->photo ,
-					'Password'=> sha1($post->password),
-					'Email'=> $post->email, 
-					'UserType'=> $post->usertype, 
-					'AuditedUser'=> 'Guest' 
-		));
-		$data = $res->result();
+		if($this->session->userdata('loggedin')==NULL) redirect('home');
+		$res = $this->sp('GetUserProfile', 
+				array('userid' => $this->session->userdata('userid')
+			));
+		$data = $res -> result();
 		$this->load->view('json_view', array('json' => $data));
 	}
 }

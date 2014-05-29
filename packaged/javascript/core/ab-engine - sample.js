@@ -37,7 +37,8 @@ var AB = {
 	//imageUri: 'http://localhost:8088/portalstaff/images/',
 	serviceUri: 'http://localhost:8088/ujianonlinelatest/',
 	dashboardUri: 'http://localhost:8088/ujianonlinelatest/home',
-	//uploadUri: 'http://localhost:8088/useruploads/',
+	userPhotoUri: 'http://localhost:2812/ujianonlinelatest/packaged/images/registereduser',
+	uploadUri: 'http://localhost:8088/useruploads/',
 	months: ['','January','February','March','April','May','June','July','August','September','October','November','December'],
 	shortMonths: ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
 	

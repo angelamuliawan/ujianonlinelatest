@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
 	$('#formLogin').form({
 	username: {
       identifier : 'loginusername',
@@ -51,18 +50,6 @@ $(document).ready(function(){
 			});
 		}
 	});
-/*
-	$(".btnLogout").click(function(){
-		AB.ajax({
-			url: AB.serviceUri + 'home/doLogout',
-			type: 'post',
-			dataType: 'json',
-			contentType: 'application/json;charset=utf-8',
-			success:function(data){
-				
-			}	
-		});
-	});*/
 	$(".btnLogout").click(function(){
 		window.location.href= AB.serviceUri+'home/doLogout';
 	});

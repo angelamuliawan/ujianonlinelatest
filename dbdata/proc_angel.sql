@@ -22,7 +22,7 @@ GO
 -- Create date: 18 Mei 2014
 -- Description:	Insert Level
 -- =============================================
-ALTER PROCEDURE [dbo].[InsertLevel]
+CREATE PROCEDURE [dbo].[InsertLevel]
 	-- Add the parameters for the stored procedure here
 	@LevelName varchar(50),
 	@AuditedUser varchar(20)
@@ -147,7 +147,7 @@ END
 -- Create date: 16 Mei 2014
 -- Description:	Get Degree
 -- =============================================
-ALTER PROCEDURE [dbo].[GetDegree]
+CREATE PROCEDURE [dbo].[GetDegree]
 	-- Add the parameters for the stored procedure here
 AS
 BEGIN

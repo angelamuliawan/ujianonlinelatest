@@ -19,6 +19,8 @@ class BackEnd extends AB_Controller {
 	 */
 	public function index()
 	{
+		if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
 		$pageContent = $this->load->view('content/backend', '',  TRUE);
 
 		//Load Master View
@@ -26,70 +28,84 @@ class BackEnd extends AB_Controller {
 				array('pageContent'=>$pageContent));
 	}
 	public function getDegree(){
+		if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
 		$res = $this->sp('GetDegree');
 		$data = $res -> result();
 		$this->load->view('json_view', array('json' => $data));
    }
    public function getCategory(){
+   		if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
 		$res = $this->sp('GetCategory');
 		$data = $res -> result();
 		$this->load->view('json_view', array('json' => $data));
    }
    	public function getLevel(){
+   		if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
 		$res = $this->sp('GetLevel');
 		$data = $res -> result();
 		$this->load->view('json_view', array('json' => $data));
    }
 
    	public function changeDegree(){
+   		if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
    		$post = $this->rest->post();
    		if($post->DegreeID == -1)
 			$res = $this->sp('insertDegree', 
 				array('DegreeName' => $post->DegreeName,
-					'AuditedUser' => 'Angela'
+					'AuditedUser' => $this->session->userdata('username')
 			));
 		else 
 			$res = $this->sp('EditDegree', 
 				array('DegreeID' => $post->DegreeID,
 					'DegreeName' => $post->DegreeName,
-					'AuditedUser' => 'Angela'
+					'AuditedUser' =>  $this->session->userdata('username')
 			));
 		$data = $res->result();
 		$this->load->view('json_view', array('json' => $data));
    }
 
     public function changeLevel(){
+    	if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
    		$post = $this->rest->post();
    		if($post->LevelID == -1)
 			$res = $this->sp('InsertLevel', 
 				array('LevelName' => $post->LevelName,
-					'AuditedUser' => 'Angela'
+					'AuditedUser' =>  $this->session->userdata('username')
 			));
 		else 
 			$res = $this->sp('EditLevel', 
 				array('LevelID' => $post->LevelID,
 					'LevelName' => $post->LevelName,
-					'AuditedUser' => 'Angela'
+					'AuditedUser' =>  $this->session->userdata('username')
 			));
 		$data = $res->result();
 		$this->load->view('json_view', array('json' => $data));
    }
 
     public function deleteDegree(){
+    	if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
    		$post = $this->rest->post();
 		$res = $this->sp('DeleteDegree', 
 				array('DegreeID' => $post->DegreeID,
-					'AuditedUser' => 'Angela'
+					'AuditedUser' =>  $this->session->userdata('username')
 			));
 		$data = $res->result();
 		$this->load->view('json_view', array('json' => $data));
    }
 
     public function deleteLevel(){
+    	if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
    		$post = $this->rest->post();
 		$res = $this->sp('DeleteLevel', 
 				array('LevelID' => $post->LevelID,
-					'AuditedUser' => 'Angela'
+					'AuditedUser' => $this->session->userdata('username')
 			));
 		$data = $res->result();
 		$this->load->view('json_view', array('json' => $data));
