@@ -39,3 +39,52 @@ BEGIN
 	AuditedActivity <> 'D'
 END
 GO
+
+-- =============================================
+-- Author:		Angela Muliawan
+-- Create date: 29 Mei 2014
+-- Description:	Change User Profile
+-- =============================================
+ALTER PROCEDURE [dbo].[ChangeUserProfile]
+@userid int,
+@FullName varchar(100),
+@Email varchar(100), 
+@UserPhoto varchar(100),
+@AuditedUser varchar(20)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+    UPDATE [User]
+    SET FullName = @FullName, Email = @Email, UserPhoto = @UserPhoto, AuditedUser = @AuditedUser,
+    AuditedActivity = 'E', AuditedTime = GETDATE()
+	WHERE 
+	UserID = @userid
+END
+GO
+
+-- =============================================
+-- Author:		Angela Muliawan
+-- Create date: 29 Mei 2014
+-- Description:	Change Password
+-- =============================================
+CREATE PROCEDURE [dbo].[ChangePassword]
+@userid int,
+@Password varchar(100),
+@NewPassword varchar(100),
+@AuditedUser varchar(20)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+    UPDATE [User]
+    SET Password=@NewPassword, AuditedUser = @AuditedUser,
+    AuditedActivity = 'E', AuditedTime = GETDATE()
+	WHERE 
+	UserID = @userid
+	AND
+	[Password]=@Password
+END
+GO

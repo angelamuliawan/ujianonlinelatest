@@ -35,6 +35,33 @@ class Dashboard extends AB_Controller {
 		$data = $res -> result();
 		$this->load->view('json_view', array('json' => $data));
 	}
+	public function changeUserProfile()
+	{
+		if($this->session->userdata('loggedin')==NULL) redirect('home');
+		$post = $this->rest->post();
+		$res = $this->sp('ChangeUserProfile', 
+				array('userid' => $this->session->userdata('userid'),
+						'FullName'=> $post->fullname,
+						'Email'=> $post->email,
+						'UserPhoto'=> $post->photo,
+						'AuditedUser' => $this->session->userdata('username')
+			));
+		$data = $res -> result();
+		$this->load->view('json_view', array('json' => $data));
+	}
+	public function changePassword()
+	{
+		if($this->session->userdata('loggedin')==NULL) redirect('home');
+		$post = $this->rest->post();
+		$res = $this->sp('ChangePassword', 
+				array('userid' => $this->session->userdata('userid'),
+						'Password'=> sha1($post->password),
+						'NewPassword'=> sha1($post->newpassword),
+						'AuditedUser' => $this->session->userdata('username')
+			));
+		$data = $res -> result();
+		$this->load->view('json_view', array('json' => $data));
+	}
 }
 
 /* End of file welcome.php */

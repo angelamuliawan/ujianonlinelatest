@@ -127,7 +127,7 @@
     <?php if($this->session->userdata('loggedin')!=NULL) { ?>
     <div class="ui secondary vertical menu" style="padding-top:4px;">
       <a href="<?=$domain?>/dashboard" class="item">My Dashboard</a>
-      <a href="#" class="item">Create Test</a>
+      <a href="<?=$domain?>/createtest" class="item">Create Test</a>
       <a href="#" class="item">My Creation Test</a>
       <a href="#" class="item">My Passed Test</a>
       <?php if($this->session->userdata('userrole')==1) { ?>
