@@ -88,9 +88,9 @@
 								<div class="default text">Select</div>
 								<i class="dropdown icon"></i>
 								<input type="hidden" name="degreecat">
-								<div class="menu">
-									<div class="item" data-value="individu">Individual</div>
-									<div class="item" data-value="company">Company</div>
+								<div class="menu ddlCat">
+									<!--<div class="item" data-value="individu">Individual</div>
+									<div class="item" data-value="company">Company</div>-->
 								</div>
 					    	</div>
 

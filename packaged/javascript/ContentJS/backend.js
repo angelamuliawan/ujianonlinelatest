@@ -91,6 +91,9 @@ function loadDegree(){
 		dataType: 'json',
 		contentType: 'application/json;charset=utf-8',
 		success:function(data){
+			ddlDegree = data;
+			console.log(data);
+			console.log(ddlDegree);
 			var table = $("#tblDegree");
 			$("tbody",table).find("tr").not("#iTemplateDeg").remove();
 			for(var i = 0; i<data.length; i++)
@@ -100,14 +103,9 @@ function loadDegree(){
 				$(".iDegreeName",newRow).text(data[i].DegreeName);
 				$("tbody",table).append(newRow);
 
-				//to fill dropdown in loadCategory()
-				//ddlDegree.push({value:data[i].DegreeID, text:data[i].DegreeName});
-				/*for(var j =0; j<ddlDegree.length; j++)
-				{
-					$(".menu .ddlCat").append(
-						'<div class="item" data-value="'+ddlDegree[j].value+'">'+ddlDegree.text+'</div>'
-					);
-				}*/
+				$(".menu.ddlCat").append(
+					'<div class="item" data-value="'+data[i].DegreeID+'">'+data[i].DegreeName+'</div>'
+				);
 			}
 			var tmp = $("#iTemplateDeg").clone().css("display", "").removeAttr("id").removeClass("loop").addClass("datarow");
 			$(".iDegreeID",tmp).text('-1');
@@ -146,13 +144,15 @@ function loadLevel(){
 }
 
 function loadCategory(){
+	
 	AB.ajax({
 		url: AB.serviceUri + 'backend/getCategory',
 		type: 'post',
 		dataType: 'json',
 		contentType: 'application/json;charset=utf-8',
 		success:function(data){
-			
+			console.log(ddlDegree[0]);
+			var stringDDL = '';
 			var table = $("#tblCategory");
 			//console.log(table);
 			$("tbody",table).find("tr").not("#iTemplateCat").remove();
@@ -164,13 +164,18 @@ function loadCategory(){
 				var newRow = $("#iTemplateCat",table).clone().css("display","").removeAttr("id");
 				$(".iCategoryID",newRow).text(data[i].CategoryID);
 				$(".iCategoryName",newRow).text(data[i].CategoryName);
-				//$(".iDegreeCat",newRow).text(data[i].DegreeID);
+				for(a=0;a<ddlDegree.length;a++)
+				{
+					if(ddlDegree[a].DegreeID == data[i].DegreeID)
+					{stringDDL = ddlDegree[a].DegreeName;alert('asd');break;}
+
+				}
+				$(".iDegreeCat .default",newRow).text(stringDDL);
 				$("tbody",table).append(newRow);
 			}
 			var tmp = $("#iTemplateCat").clone().css("display", "").removeAttr("id").removeClass("loop").addClass("datarow");
 			$(".iCategoryID",tmp).text('-1');
 			$(".iCategoryName",tmp).append("<div class='ui input'><input type='text' class='txtCategory' placeholder='Input New Category' /></div>");
-			//$(".iDegreeCat",tmp).text(0);
 			$(".iAction",tmp).empty().append("<i class='add icon btnAddCategory link'></i>");
 			$("#tblCategory tbody").append(tmp);
 			
