@@ -1,5 +1,23 @@
 $(document).ready(function(){
 	LoadUserProfile();
+
+	//Initialize Photo Uploader
+	new qq.FileUploaderBasic({
+		button: $("#fine-uploader-basic")[0],
+		action: 'general/douploadimage',
+		debug: false,
+		allowedExtensions: ['jpeg', 'jpg', 'gif', 'png'],
+		sizeLimit: 2048000,
+		forceMultipart:true,
+		onUpload : '',
+		onComplete:function(id, fileName, data){
+			if(data.status == '1'){
+				$("#userimage").attr('src','/ujianonlinelatest/packaged/images/registereduser/'+data.name);  
+			}
+			$("#originalPhotoName").val(data.name);
+		}
+	});
+	
 	//change profile validation
 	$('#formChangeProfile').form({
 		fullname: {
@@ -82,7 +100,7 @@ $(document).ready(function(){
 		if(!($('#formChangeProfile .field').hasClass('error')))
 		{
 			var changeprofiledata ={
-				photo : 'admin.png',
+				photo : $("#originalPhotoName").val(),
 				fullname : $("#fullname").val(),
 				email : $("#email").val()
 			}
@@ -135,6 +153,7 @@ function LoadUserProfile()
 			$("#username").val(d.UserName);
 			$("#email").val(d.Email);
 			$("#userimage").attr("src", AB.userPhotoUri+'/'+d.UserPhoto);
+			$("#originalPhotoName").val(d.UserPhoto);
 		}
 	});
 }

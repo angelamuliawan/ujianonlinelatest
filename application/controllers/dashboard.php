@@ -46,7 +46,7 @@ class Dashboard extends AB_Controller {
 						'UserPhoto'=> $post->photo,
 						'AuditedUser' => $this->session->userdata('username')
 			));
-		$data = $res -> result();
+		$data = $res->result();
 		$this->load->view('json_view', array('json' => $data));
 	}
 	public function changePassword()

@@ -20,7 +20,7 @@
 		    <div class="field">
 		    	<label>Photo</label>
 				<img src="" id="picture" style="height: 170px; width: 150px; padding-bottom: 10px;" />
-				<div id="fine-uploader-basic" class="ui blue submit button small" style="margin-top:-44.2px;">Browse</div>
+				<div id="fine-uploader-basic" class="ui blue button small" style="margin-top:-44.2px;">Browse</div>
 			</div>
 			<input type="hidden" name="photo" id="registeredPhoto" value="" />
 		    <div class="field">

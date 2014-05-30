@@ -11,7 +11,7 @@
 	  	<div class="ui segment">
 			<div class="ui form">
 				<form id="formChangeProfile">
-				<h4 class="ui dividing header">Basic Information</h4>
+					<h4 class="ui dividing header">Basic Information</h4>
 					<div class="inline field">
 				        <label style="width:190px;">Username</label>
 				        <input  style="width:300px;" type="text" name="username" id="username" disabled>
@@ -21,13 +21,16 @@
 				        <input  style="width:300px;" type="text" name="fullname" id="fullname">
 				    </div>
 					
-				   	 <div class="inline field">
+				   	<div class="inline field">
 				        <label style="width:190px;">Email</label>
 				        <input style="width:300px;" type="text" name="email" id="email">
 				    </div>
 				    <div class="inline field">    
 					    <label style="width:190px;">User Photo</label>
 					    <!--<img class="ui small image" id="userimage">-->
+						<img src="" id="userimage" style="height: 170px; width: 150px; margin-bottom: 10px;" />
+						<div id="fine-uploader-basic" class="ui blue button small" style="margin-top:-44.2px;">Browse</div>
+						<input type="hidden" name="photo" id="originalPhotoName" value="" />
 				    </div>
 				    <div class="field">
 				    	<div class="ui blue button small" id="btnChangeProfile">Save</div>
