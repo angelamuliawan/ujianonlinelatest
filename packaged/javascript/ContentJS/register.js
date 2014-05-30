@@ -5,7 +5,7 @@ $(document).ready(function(){
 	//Initialize Photo Uploader
 	 new qq.FileUploaderBasic({
 	      button: $("#fine-uploader-basic")[0],
-	      action: 'localhost:8088/ujianonlinelatest/general/douploadimage',
+	      action: 'general/douploadimage',
 	      debug: false,
 	      
 	      allowedExtensions: ['jpeg', 'jpg', 'gif', 'png'],
@@ -14,11 +14,9 @@ $(document).ready(function(){
     	  onUpload : '',
 	      onComplete:function(id, fileName, data){
 	    	  if(data.status == '1'){
-	    		  $("#picture").attr('src','localhost:8088/ujianonlinelatest/packaged/images/registereduser/'+data.name);  
+	    		  $("#picture").attr('src','/ujianonlinelatest/packaged/images/registereduser/'+data.name);  
 	    	  }
-	    	  	alert(data.name);
 	    	  	$("#registeredPhoto").val(data.name);
-	    	  	//$(".preloader").trigger("ajaxComplete");
 	      }});
 
 	$('#formRegister').form({

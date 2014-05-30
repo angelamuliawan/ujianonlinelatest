@@ -4,7 +4,6 @@ $(document).ready(function(){
 	loadLevel();
 	loadCategory();
 
-	$('.ui.selection.dropdown').dropdown();
 	$('.demo.menu .item').tab(); //to activate the tab menu
 
 	/*Start Of Degree*/
@@ -153,8 +152,13 @@ function loadCategory(){
 		dataType: 'json',
 		contentType: 'application/json;charset=utf-8',
 		success:function(data){
+			
 			var table = $("#tblCategory");
+			//console.log(table);
 			$("tbody",table).find("tr").not("#iTemplateCat").remove();
+			
+			//console.log(table);
+			
 			for(var i = 0; i<data.length; i++)
 			{
 				var newRow = $("#iTemplateCat",table).clone().css("display","").removeAttr("id");
@@ -169,6 +173,8 @@ function loadCategory(){
 			//$(".iDegreeCat",tmp).text(0);
 			$(".iAction",tmp).empty().append("<i class='add icon btnAddCategory link'></i>");
 			$("#tblCategory tbody").append(tmp);
+			
+			$('.ui.selection.dropdown').dropdown();
 		}
 	});
 }

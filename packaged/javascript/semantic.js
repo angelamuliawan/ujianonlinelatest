@@ -1485,6 +1485,8 @@ $.fn.form = function(fields, parameters) {
                 ;
               }
               if(!event.ctrlKey && key == keyCode.enter && $field.is(selector.input) ) {
+				// added on May 30, 2014
+				$('#btnLogin').trigger('click');
                 module.debug('Enter key pressed, submitting form');
                 $submit
                   .addClass(className.down)
