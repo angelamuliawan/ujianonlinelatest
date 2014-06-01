@@ -82,6 +82,46 @@ $(document).ready(function(){
 	});
 	/*End Of Level*/
 
+	/*Start Of Category*/
+	$("body").on('click', '.btnAddCategory', function(){
+		var CategoryName = $(this).closest("tr").find("input.txtCategory").val();
+		var DegreeID = $(this).closest("tr").find("input#degreecatval").val();
+		var CategoryID = $(this).closest("tr").find("td.iCategoryID").text();
+		var input = {CategoryName : CategoryName, DegreeID : DegreeID, CategoryID : CategoryID}
+		console.log(input);
+		AB.ajax({
+		url: AB.serviceUri + 'backend/changeCategory',
+		type: 'post',
+		dataType: 'json',
+		data:JSON.stringify(input),
+		contentType: 'application/json;charset=utf-8',
+		success:function(data){
+				loadCategory();
+			}	
+		});
+	});
+	$("body").on('click', '.btnDeleteCategory', function(){
+		var CategoryID = $(this).closest("tr").find("td.iCategoryID").text();
+		var input = {CategoryID : CategoryID}
+		AB.ajax({
+		url: AB.serviceUri + 'backend/deleteCategory',
+		type: 'post',
+		dataType: 'json',
+		data:JSON.stringify(input),
+		contentType: 'application/json;charset=utf-8',
+		success:function(data){
+				loadCategory();
+			}	
+		});
+	});
+
+	$("body").on('click', '.btnEditCategory', function(){
+		var CategoryName = $(this).closest("tr").find("td.iCategoryName").text();
+		$(this).closest("tr").find("td.iCategoryName").empty().append("<div class='ui input'><input type='text' class='txtCategory' placeholder='Input Category Name' value='"+CategoryName+"'/></div>")
+		$(this).closest("tr").find("td.iActionCat").empty().append("<i class='save icon btnAddCategory link'></i>");
+	});
+	/*End Of Category*/
+
 });
 
 function loadDegree(){
@@ -167,7 +207,7 @@ function loadCategory(){
 				for(a=0;a<ddlDegree.length;a++)
 				{
 					if(ddlDegree[a].DegreeID == data[i].DegreeID)
-					{stringDDL = ddlDegree[a].DegreeName;alert('asd');break;}
+					{stringDDL = ddlDegree[a].DegreeName;break;}
 
 				}
 				$(".iDegreeCat .default",newRow).text(stringDDL);
@@ -176,7 +216,7 @@ function loadCategory(){
 			var tmp = $("#iTemplateCat").clone().css("display", "").removeAttr("id").removeClass("loop").addClass("datarow");
 			$(".iCategoryID",tmp).text('-1');
 			$(".iCategoryName",tmp).append("<div class='ui input'><input type='text' class='txtCategory' placeholder='Input New Category' /></div>");
-			$(".iAction",tmp).empty().append("<i class='add icon btnAddCategory link'></i>");
+			$(".iActionCat",tmp).empty().append("<i class='add icon btnAddCategory link'></i>");
 			$("#tblCategory tbody").append(tmp);
 			
 			$('.ui.selection.dropdown').dropdown();

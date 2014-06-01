@@ -87,7 +87,7 @@
 							<div class="ui fluid selection dropdown" id="degreecat">
 								<div class="default text">Select</div>
 								<i class="dropdown icon"></i>
-								<input type="hidden" name="degreecat">
+								<input type="hidden" name="degreecatval" id="degreecatval">
 								<div class="menu ddlCat">
 									<!--<div class="item" data-value="individu">Individual</div>
 									<div class="item" data-value="company">Company</div>-->

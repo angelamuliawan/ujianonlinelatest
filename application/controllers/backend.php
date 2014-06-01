@@ -87,6 +87,27 @@ class BackEnd extends AB_Controller {
 		$this->load->view('json_view', array('json' => $data));
    }
 
+    public function changeCategory(){
+    	if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
+   		$post = $this->rest->post();
+   		if($post->CategoryID == -1)
+			$res = $this->sp('InsertCategory', 
+				array('CategoryName' => $post->CategoryName,
+					'DegreeID' => $post->DegreeID,
+					'AuditedUser' =>  $this->session->userdata('username')
+			));
+		else 
+			$res = $this->sp('EditCategory', 
+				array('CategoryID' => $post->CategoryID,
+					'CategoryName' => $post->CategoryName,
+					'DegreeID' => $post->DegreeID,
+					'AuditedUser' =>  $this->session->userdata('username')
+			));
+		$data = $res->result();
+		$this->load->view('json_view', array('json' => $data));
+   }
+
     public function deleteDegree(){
     	if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
 			redirect('home');
@@ -105,6 +126,17 @@ class BackEnd extends AB_Controller {
    		$post = $this->rest->post();
 		$res = $this->sp('DeleteLevel', 
 				array('LevelID' => $post->LevelID,
+					'AuditedUser' => $this->session->userdata('username')
+			));
+		$data = $res->result();
+		$this->load->view('json_view', array('json' => $data));
+   }
+   public function deleteCategory(){
+    	if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
+   		$post = $this->rest->post();
+		$res = $this->sp('DeleteCategory', 
+				array('CategoryID' => $post->CategoryID,
 					'AuditedUser' => $this->session->userdata('username')
 			));
 		$data = $res->result();
