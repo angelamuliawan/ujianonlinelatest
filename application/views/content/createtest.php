@@ -12,7 +12,7 @@
 <div class="segment">
 	<div class="container">
 		<!-- Title -->
-	  <h2 class="ui dividing header">Create Test</h2>
+		<h2 class="ui dividing header">Create Test</h2>
 	  	<!-- Content -->
 	  	<div class="ui form segment">
 			<form id="formCreateTest">
@@ -114,6 +114,70 @@
 				</div>
 				
 				<div class="ui blue submit button" id="btnCreateTest">Lets customize test</div>
+			</form>
+    	</div>
+		<!-- End Of Content -->
+		
+		<!-- Title -->
+		<h2 class="ui dividing header">Step 2</h2>
+	  	<!-- Content -->
+	  	<div class="ui form segment">
+			<form id="formQuestion">
+				<div class="field">
+					<label>Test Name</label>
+					<div class="ui left labeled input">
+					  <input placeholder="Type your test name here..." type="text" name="testname" id="testname">
+					</div>
+				</div>
+				
+				<!-- template, not displayed -->
+				<div class="column iTemplateQuestion" style="display:none;">
+					<div class="ui fluid form segment">
+					  <h3 class="ui header">Question X</h3>
+					  <div class="field">
+						  <input type="text" placeholder="Type question here ...">
+						</div>
+					  <div class="two fields">
+						<div class="field">
+						  <div class="ui radio checkbox">
+							<input type="radio" checked="checked" class="radio optionA" >
+							<label>Option A</label>
+						  </div>
+						  <input type="text" class="questionOptionA" placeholder="Type answer here...">
+						</div>
+						<div class="field">
+						  <div class="ui radio checkbox">
+							<input type="radio" class="radio optionB" >
+							<label>Option B</label>
+						  </div>
+						  <input type="text" class="questionOptionB" placeholder="Type answer here...">
+						</div>
+					  </div>
+					  <div class="two fields">
+						<div class="field">
+						  <div class="ui radio checkbox">
+							<input type="radio" class="radio optionC" >
+							<label>Option C</label>
+						  </div>
+						  <input type="text" class="questionOptionC" placeholder="Type answer here...">
+						</div>
+						<div class="field">
+						  <div class="ui radio checkbox">
+							<input type="radio" class="radio optionD" >
+							<label>Option D</label>
+						  </div>
+						  <input type="text" class="questionOptionD" placeholder="Type answer here...">
+						</div>
+					  </div>
+					  
+					  <div class="ui red button btnDeleteQuestion">Delete this question</div>
+					</div>
+				</div>
+				
+				
+				<div class="ui green button" id="btnAddQuestion">Add Question</div>
+				<div class="ui red button" id="btnRemoveAllQuestion">Remove all question</div>
+				<div class="ui blue button" id="btnSaveAllQuestion">Save Sheet</div>
 			</form>
     	</div>
 		<!-- End Of Content -->

@@ -125,6 +125,62 @@ $(document).ready(function(){
 		}
 	});
 
+	
+	// question event
+	var totalQuestion = 1;
+	$("#btnAddQuestion").click(function(){
+		
+		var tmp = $(".column.iTemplateQuestion").clone().removeClass("iTemplateQuestion").addClass("datarow");
+		
+		// set number of question
+		$(".ui.header", tmp).text("Question " + totalQuestion);
+		$(".radio.optionA", tmp).attr('name','answer' + totalQuestion);
+		$(".radio.optionB", tmp).attr('name','answer' + totalQuestion);
+		$(".radio.optionC", tmp).attr('name','answer' + totalQuestion);
+		$(".radio.optionD", tmp).attr('name','answer' + totalQuestion);
+		
+		$(".questionOptionA", tmp).attr('name', 'question'+totalQuestion+'_OptionA');
+		$(".questionOptionB", tmp).attr('name', 'question'+totalQuestion+'_OptionB');
+		$(".questionOptionC", tmp).attr('name', 'question'+totalQuestion+'_OptionC');
+		$(".questionOptionD", tmp).attr('name', 'question'+totalQuestion+'_OptionD');
+		
+		$("#btnAddQuestion").before(tmp);
+		tmp.slideDown();
+		totalQuestion++;
+		$('.ui.checkbox').checkbox();
+	});
+	
+	$("body").on('click','.btnDeleteQuestion', function(){
+		totalQuestion--;
+		var tempTotalQuestion = 1;
+		$(this).closest("div.datarow").slideUp(function(){
+			$(this).closest("div.datarow").remove();
+			$(".column.datarow").each(function(){
+				var tmp = $(this);
+				// set number of question
+				alert(tmp.find(".ui.header").text());
+				$(".ui.header", tmp).text("Question " + tempTotalQuestion);
+				$(".radio.optionA", tmp).attr('name','answer' + tempTotalQuestion);
+				$(".radio.optionB", tmp).attr('name','answer' + tempTotalQuestion);
+				$(".radio.optionC", tmp).attr('name','answer' + tempTotalQuestion);
+				$(".radio.optionD", tmp).attr('name','answer' + tempTotalQuestion);
+				
+				$(".questionOptionA", tmp).attr('name', 'question'+tempTotalQuestion+'_OptionA');
+				$(".questionOptionB", tmp).attr('name', 'question'+tempTotalQuestion+'_OptionB');
+				$(".questionOptionC", tmp).attr('name', 'question'+tempTotalQuestion+'_OptionC');
+				$(".questionOptionD", tmp).attr('name', 'question'+tempTotalQuestion+'_OptionD');
+				
+				tempTotalQuestion++;
+			});
+		});
+	});
+	
+	$("#btnRemoveAllQuestion").click(function(){
+		$(".datarow").slideUp(function(){
+			$(".datarow").remove();
+		});
+		totalQuestion = 1;
+	});
 });
 
 function loadDegree(){
