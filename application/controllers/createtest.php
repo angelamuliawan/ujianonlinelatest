@@ -28,19 +28,51 @@ class CreateTest extends AB_Controller {
 	}
 	public function insertTest()
 	{
-		if($this->session->userdata('loggedin')==NULL) redirect('home');
 		$post = $this->rest->post();
-		$res = $this->sp('InsertUser', 
-			array('UserName'=> $post->username, 
-					'FullName' => $post->fullname,
-					'UserPhoto' => $post->photo ,
-					'Password'=> sha1($post->password),
-					'Email'=> $post->email, 
-					'UserType'=> $post->usertype, 
-					'AuditedUser'=> 'Guest' 
+		$res = $this->sp('InsertTest',
+			array(
+				'TestName'=> $post->TestName, 
+				'TestDescription' => $post->TestDescription,
+				'CategoryID' => $post->CategoryID,
+				'LevelID'=> $post->LevelID,
+				'DegreeID'=> $post->DegreeID, 
+				'UserID' => $this->session->userdata('userid'),
+				'AccessType'=> $post->AccessType, 
+				'PublishStartDate'=> PublishStartDate,
+				'PublishEndDate'=> $post->PublishEndDate, 
+				'UploadTutorial'=> $post->UploadTutorial,
+				'AuditedUser' => $this->session->userdata('username')
 		));
-		$data = $res->result();
+		$this->do_alert($res);
+		//$data = $res->result();
 		$this->load->view('json_view', array('json' => $data));
+	}
+	
+	public function uploadfile()
+	{
+		//Load Uploader Library
+		$config['upload_path'] = 'packaged/sharedmaterial';
+		$config['allowed_types'] = 'doc|docx|zip|rar|pdf|xls';
+	
+		$this->load->library('upload', $config);
+	
+		if (!$this->upload->do_upload('qqfile'))
+		{
+			$error = array('error' => $this->upload->display_errors());
+			echo json_encode(array('status' => "-1", 'msg' => $error));
+	
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+			$ext = $data['upload_data']['file_ext'];
+			$name = $data['upload_data']['file_name'];		
+			echo json_encode(array('status' => "1", 'name' => $name,'ext' => $ext));
+		}
+	}
+	
+	public function do_alert($message){
+		echo '<scricpt type="text/javascript">alert('+$message+')</script>';
 	}
 }
 
