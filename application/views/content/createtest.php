@@ -68,13 +68,13 @@
 					<label>Access Type</label>
 					<div class="field">
 						<div class="ui radio checkbox">
-							<input type="radio" checked="checked" value="public" class="radio" name="accessType" >
+							<input type="radio" checked="checked" value="1" class="radio" name="accessType" >
 							<label>Public</label>
 						</div>
 					</div>
 					<div class="field">
 						<div class="ui radio checkbox">
-							<input type="radio" class="radio" value="private" name="accessType">
+							<input type="radio" class="radio" value="0" name="accessType">
 							<label>Private</label>
 						</div>
 					</div>
@@ -113,7 +113,7 @@
 					<div id="fine-uploader-basic" class="ui blue button small">Browse Material</div>
 				</div>
 				
-				<div class="ui blue submit button" id="btnCreateTest">Lets customize test</div>
+				<div class="ui blue button small" id="btnCreateTest">Lets customize test</div>
 			</form>
     	</div>
 		<!-- End Of Content -->
@@ -135,49 +135,53 @@
 					<div class="ui fluid form segment">
 					  <h3 class="ui header">Question X</h3>
 					  <div class="field">
-						  <input type="text" placeholder="Type question here ...">
+						  <input type="text" class="questionDescription" placeholder="Type question here ...">
 						</div>
 					  <div class="two fields">
 						<div class="field">
 						  <div class="ui radio checkbox">
-							<input type="radio" checked="checked" class="radio optionA" >
+							<input type="radio" checked="checked" value="1" class="radio optionA" >
 							<label>Option A</label>
 						  </div>
 						  <input type="text" class="questionOptionA" placeholder="Type answer here...">
+						  <br/><div class="column"><i class="upload icon"></i>Upload File</div>
 						</div>
 						<div class="field">
 						  <div class="ui radio checkbox">
-							<input type="radio" class="radio optionB" >
+							<input type="radio" value="0" class="radio optionB" >
 							<label>Option B</label>
 						  </div>
 						  <input type="text" class="questionOptionB" placeholder="Type answer here...">
+						  <br/><div class="column"><i class="upload icon"></i>Upload File</div>
 						</div>
 					  </div>
 					  <div class="two fields">
 						<div class="field">
 						  <div class="ui radio checkbox">
-							<input type="radio" class="radio optionC" >
+							<input type="radio" value="0" class="radio optionC" >
 							<label>Option C</label>
 						  </div>
 						  <input type="text" class="questionOptionC" placeholder="Type answer here...">
+						  <br/><div class="column"><i class="upload icon"></i>Upload File</div>
 						</div>
 						<div class="field">
 						  <div class="ui radio checkbox">
-							<input type="radio" class="radio optionD" >
+							<input type="radio" value="0" class="radio optionD" >
 							<label>Option D</label>
 						  </div>
 						  <input type="text" class="questionOptionD" placeholder="Type answer here...">
+						  <br/><div class="column"><i class="upload icon"></i>Upload File</div>
 						</div>
 					  </div>
 					  
-					  <div class="ui red button btnDeleteQuestion">Delete this question</div>
+					  <div class="ui red button small btnDeleteQuestion">Delete this question</div>
 					</div>
 				</div>
 				
 				
-				<div class="ui green button" id="btnAddQuestion">Add Question</div>
-				<div class="ui red button" id="btnRemoveAllQuestion">Remove all question</div>
-				<div class="ui blue button" id="btnSaveAllQuestion">Save Sheet</div>
+				<div class="ui green button small" id="btnAddQuestion">Add Question</div>
+				<div class="ui red button small" id="btnRemoveAllQuestion">Remove all question</div>
+				<div class="ui blue button small" id="btnSaveAllQuestion">Save Sheet</div>
 			</form>
     	</div>
 		<!-- End Of Content -->

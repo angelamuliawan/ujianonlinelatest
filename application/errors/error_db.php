@@ -1,0 +1,1 @@
+{"status":"error","errno":12,"error": "<?php echo str_replace("\"", "\\\"", $heading); ?>","longerror":"<?php echo str_replace("\"", "\\\"", $message); ?>"}

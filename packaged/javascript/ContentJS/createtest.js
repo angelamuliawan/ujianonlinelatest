@@ -1,3 +1,6 @@
+var objTestDetail = new Array();
+var objTestDetailAnswer = new Array();
+var curTestID = 0;
 $(document).ready(function(){
 	loadDegree();
 	loadLevel();
@@ -66,6 +69,12 @@ $(document).ready(function(){
 		
 	});
 	
+	$("body").on('change', "input.radio", function(){
+		var selector = $(this).attr('name');
+		$("[name='"+selector+"']").val(0);
+		$(this).val(1);
+	});
+	
 	new qq.FileUploaderBasic({
 		button: $("#fine-uploader-basic")[0],
 		action: 'createtest/uploadfile',
@@ -81,8 +90,118 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("#btnCreateTest").click(function(e){
+	// upload icon for option answer
+	// new qq.FileUploaderBasic({
+		// button: $(".column.btnOptionUpload")[0],
+		// action: 'createtest/uploadfile',
+		// debug: false,
+		// allowedExtensions: ['doc', 'docx', 'zip', 'rar','pdf','xls'],
+		// sizeLimit: 2048000,
+		// forceMultipart:true,
+		// onComplete:function(id, fileName, data)
+		// {
+			// alert($(this).parent().text());
+			// //$("#FileExtention").val(data.ext);
+			// //$("#sharedMaterial").val(data.name);
+		// }
+	// });
 	
+	
+	
+	$("#btnSaveAllQuestion").click(function(){
+		var counter = 0;
+		objTestDetail = new Array();
+		objTestDetailAnswer = new Array();
+		$(".column.datarow").each(function(){
+			var tmp = $(this);
+			
+			// get question description
+			var question = $("input[name='question_desc"+(counter+1)+"']").val();
+			// if question contain uploaded file, temporary
+			var testURL = 'N/A';
+			
+			// get option description
+			var optionA_description = $(".questionOptionA", tmp).val();
+			var optionB_description = $(".questionOptionB", tmp).val();
+			var optionC_description = $(".questionOptionC", tmp).val();
+			var optionD_description = $(".questionOptionD", tmp).val();
+			
+			// get option value, this will determine which answer is right or wrong
+			// 1 is true, 0 is false.
+			var optionA_value = $(".radio.optionA", tmp).val();
+			var optionB_value = $(".radio.optionB", tmp).val();
+			var optionC_value = $(".radio.optionC", tmp).val();
+			var optionD_value = $(".radio.optionD", tmp).val();
+			
+			// get optionURI
+			var optionA_URL = 'N/A';
+			var optionB_URL = 'N/A';
+			var optionC_URL = 'N/A';
+			var optionD_URL = 'N/A';
+			
+			objTestDetail.push({
+				'TestQuestion' : question,
+				'TestURL' : testURL
+			});
+			
+			objTestDetailAnswer[counter] = new Array();
+			// push option A			
+			objTestDetailAnswer[counter].push({
+				'TestDetailAnswerName' : optionA_description,
+				'TestDetailURL' : optionA_URL,
+				'isAnswer' : optionA_value,
+				'option' : 'A'
+			});
+			
+			// push option B			
+			objTestDetailAnswer[counter].push({
+				'TestDetailAnswerName' : optionB_description,
+				'TestDetailURL' : optionB_URL,
+				'isAnswer' : optionB_value,
+				'option' : 'B'
+			});
+			
+			// push option C			
+			objTestDetailAnswer[counter].push({
+				'TestDetailAnswerName' : optionC_description,
+				'TestDetailURL' : optionC_URL,
+				'isAnswer' : optionC_value,
+				'option' : 'C'
+			});
+			
+			// push option D			
+			objTestDetailAnswer[counter].push({
+				'TestDetailAnswerName' : optionD_description,
+				'TestDetailURL' : optionD_URL,
+				'isAnswer' : optionD_value,
+				'option' : 'D'
+			});
+			counter++;
+		});
+		
+		var objParam = {
+			listTestDetail : objTestDetail,
+			listTestDetailAnswer : objTestDetailAnswer,
+			TestID : curTestID
+		}
+		
+		AB.ajax({
+			url: AB.serviceUri + 'createtest/insertTestDetail',
+			type: 'post',
+			dataType: 'json',
+			data:JSON.stringify(objParam),
+			contentType: 'application/json;charset=utf-8',
+			success:function(data){
+				alert("Test successfully created.");
+			}	
+		});
+		
+		//console.log(objTestDetail);
+		//console.log(objTestDetailAnswer);
+	});
+	
+	$("#btnCreateTest").click(function(e){
+		e.preventDefault();
 		var selectedAccessType, publishDate, startDate, endDate;
 		selectedAccessType = $("input[name='accessType']:checked").val();
 		publishDate = $("input[name='publishDate']:checked").val();
@@ -112,6 +231,8 @@ $(document).ready(function(){
 				PublishEndDate : endDate,
 				UploadTutorial : $("#sharedMaterial").val()
 			}
+			//console.log(createtestdata);
+			//alert('asdf');
 			AB.ajax({
 				url: AB.serviceUri + 'createtest/insertTest',
 				type: 'post',
@@ -119,6 +240,8 @@ $(document).ready(function(){
 				data:JSON.stringify(createtestdata),
 				contentType: 'application/json;charset=utf-8',
 				success:function(data){
+					console.log(data);
+					curTestID = data;
 					alert('Test created successfully.');
 				}	
 			});
@@ -134,6 +257,9 @@ $(document).ready(function(){
 		
 		// set number of question
 		$(".ui.header", tmp).text("Question " + totalQuestion);
+		
+		$(".questionDescription", tmp).attr('name', 'question_desc' + totalQuestion);
+		
 		$(".radio.optionA", tmp).attr('name','answer' + totalQuestion);
 		$(".radio.optionB", tmp).attr('name','answer' + totalQuestion);
 		$(".radio.optionC", tmp).attr('name','answer' + totalQuestion);
@@ -158,8 +284,9 @@ $(document).ready(function(){
 			$(".column.datarow").each(function(){
 				var tmp = $(this);
 				// set number of question
-				alert(tmp.find(".ui.header").text());
+				//alert(tmp.find(".ui.header").text());
 				$(".ui.header", tmp).text("Question " + tempTotalQuestion);
+				$(".questionDescription", tmp).attr('name', 'question_desc' + tempTotalQuestion);
 				$(".radio.optionA", tmp).attr('name','answer' + tempTotalQuestion);
 				$(".radio.optionB", tmp).attr('name','answer' + tempTotalQuestion);
 				$(".radio.optionC", tmp).attr('name','answer' + tempTotalQuestion);
