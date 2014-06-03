@@ -18,6 +18,7 @@
 					    <th>Test Name</th>
 					    <th>Degree</th>
 					    <th>Category</th>
+					     <th>Level</th>
 					    <th>Type</th>
 					    <th>Number Of People</th>
 					    <th>Print</th>
@@ -30,6 +31,7 @@
 						<td class="iTestName"></td>
 						<td class="iDegree"></td>
 						<td class="iCategory"></td>
+						<td class="iLevel"></td>
 						<td class="iType"></td>
 						<td class="iNumberOfPeople" style="width:50px;"></i></td>
 						<td><i class="print icon iPrint link"></i></td>

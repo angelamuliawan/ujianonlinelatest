@@ -48,6 +48,7 @@ function loadCreationTest()
 				$(".iTestName",newRow).text(data[i].TestName);
 				$(".iDegree",newRow).text(data[i].DegreeName);
 				$(".iCategory",newRow).text(data[i].CategoryName);
+				$(".iLevel",newRow).text(data[i].LevelName);
 				$(".iType",newRow).text(access);
 				$(".iNumberOfPeople",newRow).append(data[i].NumberOfPeople+'<i class="search icon iSearch link openmodalpeople" style="position:absolute;">');
 				$("tbody",table).append(newRow);

@@ -26,19 +26,10 @@ class MyPassedTest extends AB_Controller {
 		$this->load->view('master/master',
 				array('pageContent'=>$pageContent));
 	}
-	public function getCreationTest(){
+	public function getPassedTest(){
     	if($this->session->userdata('loggedin')==NULL) redirect('home');
-		$res = $this->sp('GetCreationTest', 
+		$res = $this->sp('GetPassedTest', 
 					array('userid' => $this->session->userdata('userid')
-			));
-		$data = $res->result();
-		$this->load->view('json_view', array('json' => $data));
-   }
-   public function getNumberOfPeople(){
-    	if($this->session->userdata('loggedin')==NULL) redirect('home');
-    	$post = $this->rest->post();
-		$res = $this->sp('GetNumberOfPeople', 
-					array('testid' => $post->testid
 			));
 		$data = $res->result();
 		$this->load->view('json_view', array('json' => $data));

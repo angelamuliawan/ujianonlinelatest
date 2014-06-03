@@ -31,20 +31,21 @@ GO
 -- Create date: 2 Juni 2014
 -- Description:	Get Creation Test
 -- =============================================
-CREATE PROCEDURE [dbo].[GetCreationTest] 
+ALTER PROCEDURE [dbo].[GetCreationTest]1 
 @userid int 
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-    SELECT t.TestID, CAST(CONVERT(VARCHAR(13),PublishStartDate,106) as varchar)+ ' - '+CAST(CONVERT(VARCHAR(13),PublishEndDate,106) as varchar) 'PublishDate', TestName, DegreeName, CategoryName, AccessType, COUNT(ua.TestID) 'NumberOfPeople'
+    SELECT t.TestID, LevelName, CAST(CONVERT(VARCHAR(13),PublishStartDate,106) as varchar)+ ' - '+CAST(CONVERT(VARCHAR(13),PublishEndDate,106) as varchar) 'PublishDate', TestName, DegreeName, CategoryName, AccessType, COUNT(ua.TestID) 'NumberOfPeople'
     FROM Test t
     JOIN Category c on t.CategoryID = c.CategoryID
 	JOIN Degree d on d.DegreeID = c.DegreeID
 	LEFT Join UserAnswer ua on ua.TestID = t.TestID
-	WHERE t.UserID = @userid AND t.AuditedActivity <> 'D' AND c.AuditedActivity <> 'D' AND ua.AuditedActivity <> 'D' AND d.AuditedActivity <> 'D'
-	GROUP BY t.TestID, PublishStartDate, PublishEndDate, TestName, DegreeName, CategoryName, AccessType
+	JOIN [Level] l on l.LevelID = t.LevelID
+	WHERE t.UserID = @userid AND t.AuditedActivity <> 'D' AND c.AuditedActivity <> 'D' AND d.AuditedActivity <> 'D'
+	GROUP BY t.TestID, PublishStartDate, PublishEndDate, TestName, DegreeName, CategoryName, AccessType, LevelName
 END
 GO
 
@@ -81,5 +82,43 @@ BEGIN
     JOIN TestDetailAnswer tda on tda.TestDetailAnswerID = uad.TestDetailAnswerID
     WHERE ua.testid = @testid
 	GROUP BY ua.UserID, UserEmail, AccessType, u.UserName
+END
+GO
+
+
+-- =============================================
+-- Author:		Angela Muliawan
+-- Create date: 2 Juni 2014
+-- Description:	Get Passed Test
+-- =============================================
+ALTER PROCEDURE [dbo].[GetPassedTest] 2
+@userid int 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+    SELECT t.TestID, CONVERT(VARCHAR(13),ua.AuditedTime,106) 'Date',
+    TestName, DegreeName, CategoryName, LevelName,
+    (CAST(SUM(CASE WHEN tda.isAnswer = 1 THEN 1 ELSE 0 END) as float)/
+    CAST(COUNT(td.TestID)as float))*100 'Score'
+    FROM Test t
+    JOIN Category c on t.CategoryID = c.CategoryID
+	JOIN Degree d on d.DegreeID = c.DegreeID
+	Join UserAnswer ua on ua.TestID = t.TestID
+	JOIN TestDetail td on td.TestID = t.TestID
+	JOIN [Level] l on l.LevelID = t.LevelID
+    JOIN UserAnswerDetail uad on uad.UserAnswerID= ua.UserAnswerID AND uad.testDetailID = td.TestDetailID
+    JOIN TestDetailAnswer tda on tda.TestDetailAnswerID = uad.TestDetailAnswerID
+	WHERE ua.UserID = @userid 
+	AND t.AuditedActivity <> 'D' 
+	AND c.AuditedActivity <> 'D' 
+	AND d.AuditedActivity <> 'D'
+	AND ua.AuditedActivity <> 'D'
+	AND td.AuditedActivity <> 'D'
+	AND uad.AuditedActivity <> 'D'
+	AND tda.AuditedActivity <> 'D'
+	AND l.AuditedActivity <> 'D'
+	GROUP BY t.TestID, TestName, DegreeName, CategoryName, ua.AuditedTime, LevelName
 END
 GO
