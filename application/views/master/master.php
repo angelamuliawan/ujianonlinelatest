@@ -29,8 +29,8 @@
 	
 	<!-- Load Required JS Files -->
 	<script src="<?=$domain?>/packaged/javascript/jquery.js"></script>
-	<script src="<?=$domain?>/packaged/javascript/homepage.js"></script>
 	<script src="<?=$domain?>/packaged/javascript/semantic.js"></script>
+	<script src="<?=$domain?>/packaged/javascript/homepage.js"></script>
 	<script src="<?=$domain?>/packaged/javascript/ajaxfileupload/ajaxfileupload.js"></script>
 	<script src="<?=$domain?>/packaged/javascript/jquery.address.js"></script>
 	<script src="<?=$domain?>/packaged/javascript/core/ab-engine.js"></script>
@@ -41,28 +41,25 @@
 <script src="<?=$domain?>/packaged/javascript/ContentJS/home.js"></script>
   <script>
     $(document).ready(function() {
-      $('.sidemenu.sidebar').first().sidebar('attach events', '.toggle.button');
-      $('.toggle.button');
+		$('.sidemenu.sidebar').first().sidebar('attach events', '.toggle.button');
+		$('.toggle.button');
+		$('.loginmodal.modal').modal('attach events', '.openmodal', 'show');
 
-      $('.ui.accordion').accordion();
+		//to hide fixed bar menu in home
+		var pathname = window.location.pathname;
+		var page = pathname.split('/ujianonlinelatest/');
+		if(page[1] == '' || page[1] == 'home') $(".fixedmenu").hide();
+		else $(".fixedmenu").show();
 
-     $('.loginmodal.modal').modal('attach events', '.openmodal', 'show');
+		//hover most viewed test to see category and degree
+		$('.item-popup').popup({
+		  on: 'hover',
+		  inline : true
+		});
 
-      //to hide fixed bar menu in home
-      var pathname = window.location.pathname;
-      var page = pathname.split('/ujianonlinelatest/');
-      if(page[1] == '' || page[1] == 'home') $(".fixedmenu").hide();
-      else $(".fixedmenu").show();
-
-      //hover most viewed test to see category and degree
-       $('.item-popup').popup({
-          on: 'hover',
-          inline : true
-        });
-
-       $(".btnRegister").click(function(){
-            window.location.href =  $('#domain').val()+"/register";
-       });
+		$(".btnRegister").click(function(){
+			window.location.href =  $('#domain').val()+"/register";
+		});
     });
   </script>
   <style>
@@ -142,13 +139,12 @@
       <input placeholder="Search Category..." type="text">
       <i class="inverted search icon"></i>
     </div>
-    <div class="ui fluid accordion">
-		<div class="title iTemplateDegree" style="display:none;">
+    <div class="ui fluid accordion iContainerDegree">
+		<div class="title" style="display:none;" id="iTemplateDegree" data-id="0">
 			<i class="dropdown icon iDegree"></i>
-			High School
 		</div>
-		<div class="content iTemplateAccordion" style="display:none;">
-			<a href="#" class="iCategoryName">Description A</a>
+		<div class="content" style="display:none;" id="iTemplateAccordion">
+			<a href="#" class="iCategoryName"></a>
 		</div>
 	</div>
     <div class="ui secondary vertical menu">

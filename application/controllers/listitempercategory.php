@@ -17,14 +17,13 @@ class ListItemPerCategory extends AB_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
+	public function index($param = 0)
 	{
-		//$this->load->view('master/master');
-		$pageContent = $this->load->view('content/listitempercategory', '',  TRUE);
+		$data = array('CategoryID' => $param);
+		$pageContent = $this->load->view('content/listitempercategory', $data,  TRUE);
 
 		//Load Master View
-		$this->load->view('master/master',
-				array('pageContent'=>$pageContent));
+		$this->load->view('master/master',array('pageContent'=>$pageContent));
 	}
 }
 
