@@ -42,7 +42,7 @@ BEGIN
     FROM Test t
     JOIN Category c on t.CategoryID = c.CategoryID
 	JOIN Degree d on d.DegreeID = c.DegreeID
-	Join UserAnswer ua on ua.TestID = t.TestID
+	LEFT Join UserAnswer ua on ua.TestID = t.TestID
 	WHERE t.UserID = @userid AND t.AuditedActivity <> 'D' AND c.AuditedActivity <> 'D' AND ua.AuditedActivity <> 'D' AND d.AuditedActivity <> 'D'
 	GROUP BY t.TestID, PublishStartDate, PublishEndDate, TestName, DegreeName, CategoryName, AccessType
 END
