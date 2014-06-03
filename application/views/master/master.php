@@ -34,8 +34,11 @@
 	<script src="<?=$domain?>/packaged/javascript/ajaxfileupload/ajaxfileupload.js"></script>
 	<script src="<?=$domain?>/packaged/javascript/jquery.address.js"></script>
 	<script src="<?=$domain?>/packaged/javascript/core/ab-engine.js"></script>
+	
+	<!-- Load jquery session.js -->
+	<script src="<?=$domain?>/packaged/javascript/session/jquery.session.js"></script>
 
- <script src="<?=$domain?>/packaged/javascript/ContentJS/home.js"></script>
+<script src="<?=$domain?>/packaged/javascript/ContentJS/home.js"></script>
   <script>
     $(document).ready(function() {
       $('.sidemenu.sidebar').first().sidebar('attach events', '.toggle.button');
@@ -128,7 +131,7 @@
     <div class="ui secondary vertical menu" style="padding-top:4px;">
       <a href="<?=$domain?>/dashboard" class="item">My Dashboard</a>
       <a href="<?=$domain?>/createtest" class="item">Create Test</a>
-      <a href="#" class="item">My Creation Test</a>
+      <a href="<?=$domain?>/mycreationtest" class="item">My Creation Test</a>
       <a href="#" class="item">My Passed Test</a>
       <?php if($this->session->userdata('userrole')==1) { ?>
       <a href="<?=$domain?>/backend" class="item">Manage Content</a>
@@ -140,23 +143,16 @@
       <i class="inverted search icon"></i>
     </div>
     <div class="ui fluid accordion">
-      <div class="title">
-        <i class="dropdown icon"></i>
-          High School
-      </div>
-      <div class="content">
-        <a href="#">English For High School</a>
-      </div>
-      <div class="title">
-        <i class="dropdown icon"></i>
-        University
-      </div>
-      <div class="content">
-        <a href="#">SNMPTN Test</a>
-      </div>
-    </div>
+		<div class="title iTemplateDegree" style="display:none;">
+			<i class="dropdown icon iDegree"></i>
+			High School
+		</div>
+		<div class="content iTemplateAccordion" style="display:none;">
+			<a href="#" class="iCategoryName">Description A</a>
+		</div>
+	</div>
     <div class="ui secondary vertical menu">
-      <a href="<?=$domain?>/listcategory" class="item">More Categories...</a>
+		<a href="<?=$domain?>/listcategory" class="item">More Categories...</a>
     </div>
   </div>
   <!--End Of Sidebar -->

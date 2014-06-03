@@ -47,6 +47,7 @@ $(document).ready(function(){
 					else 
 					{
 						$("#errorLogin").text("");
+						$.session.set('userlogin', true);
 						window.location.href= AB.dashboardUri;
 					}
 				}	
@@ -55,6 +56,7 @@ $(document).ready(function(){
 	});
 
 	$(".btnLogout").click(function(){
+		$.session.set('userlogin', false);
 		window.location.href= AB.serviceUri+'home/doLogout';
 	});
 });

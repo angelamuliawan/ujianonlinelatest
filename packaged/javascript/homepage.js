@@ -1,6 +1,6 @@
-$(document)
-  .ready(function() {
+$(document).ready(function(){
 
+	// template. copied from semantic ui
     var
       changeSides = function() {
         $('.ui.shape')
@@ -35,23 +35,28 @@ $(document)
       }
     ;
 
-    $('.ui.dropdown')
-      .dropdown({
-        on: 'hover'
-      })
-    ;
-
-    $('.ui.form')
-      .form(validationRules, {
-        on: 'blur'
-      })
-    ;
-
-    $('.masthead .information')
-      .transition('scale in')
-    ;
-
+    $('.ui.dropdown').dropdown({on: 'hover'});
+    $('.ui.form').form(validationRules, {on: 'blur'});
+    $('.masthead .information').transition('scale in');
     setInterval(changeSides, 3000);
-
-  })
-;
+	
+	
+	// our code goes here
+	if($.session.get('userlogin') == true){
+		
+		AB.ajax({
+			url: AB.serviceUri + 'backend/getCategory',
+			type: 'post',
+			dataType: 'json',
+			contentType: 'application/json;charset=utf-8',
+			success:function(data){
+				
+				for(var i = 0; i<data.length; i++)
+				{
+					var tmp = $(".title.iTemplateDegree").clone().removeClass("iTemplateDegree").addClass("datarow");
+				}
+			}
+		});
+		
+	}
+});
