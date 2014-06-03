@@ -42,7 +42,7 @@ $(document).ready(function(){
 	
 	
 	// our code goes here
-	if($.session.get('userlogin')){
+	if($.session.get('userlogin') !== undefined){
 		AB.ajax({
 			url: AB.serviceUri + 'backend/getDegree',
 			type: 'post',

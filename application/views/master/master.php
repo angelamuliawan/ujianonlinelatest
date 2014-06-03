@@ -30,13 +30,14 @@
 	<!-- Load Required JS Files -->
 	<script src="<?=$domain?>/packaged/javascript/jquery.js"></script>
 	<script src="<?=$domain?>/packaged/javascript/semantic.js"></script>
+	
+	<!-- Load jquery session.js -->
+	<script src="<?=$domain?>/packaged/javascript/session/jquery.session.js"></script>
+	
 	<script src="<?=$domain?>/packaged/javascript/homepage.js"></script>
 	<script src="<?=$domain?>/packaged/javascript/ajaxfileupload/ajaxfileupload.js"></script>
 	<script src="<?=$domain?>/packaged/javascript/jquery.address.js"></script>
 	<script src="<?=$domain?>/packaged/javascript/core/ab-engine.js"></script>
-	
-	<!-- Load jquery session.js -->
-	<script src="<?=$domain?>/packaged/javascript/session/jquery.session.js"></script>
 
 <script src="<?=$domain?>/packaged/javascript/ContentJS/home.js"></script>
   <script>

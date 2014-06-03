@@ -47,7 +47,7 @@ $(document).ready(function(){
 					else 
 					{
 						$("#errorLogin").text("");
-						$.session.set('userlogin', true);
+						$.session.set('userlogin',  $("#loginusername").val());
 						window.location.href= AB.dashboardUri;
 					}
 				}	

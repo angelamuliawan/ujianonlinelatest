@@ -4,6 +4,8 @@
 ?>
 <style>
 </style>
+<input type="hidden" id="hdnCategoryID" />
+<script src="<?=$domain?>/packaged/javascript/ContentJS/listitempercategory.js"></script>
 <div class="segment">
 	<div class="container">
 		<!-- Title -->

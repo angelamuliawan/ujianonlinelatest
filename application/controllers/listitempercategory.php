@@ -25,6 +25,17 @@ class ListItemPerCategory extends AB_Controller {
 		//Load Master View
 		$this->load->view('master/master',array('pageContent'=>$pageContent));
 	}
+	
+	public function getCategory(){
+		$post = $this->rest->post();
+   		if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
+		$res = $this->sp('GetDegreeWithCategory', array(
+			'DegreeID' => $post->DegreeID
+		));
+		$data = $res -> result();
+		$this->load->view('json_view', array('json' => $data));
+   }
 }
 
 /* End of file welcome.php */
