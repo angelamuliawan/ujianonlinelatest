@@ -105,7 +105,39 @@ class CreateTest extends AB_Controller {
 	}
 	
 	public function do_alert($message){
-		echo '<scricpt type="text/javascript">alert('+$message+')</script>';
+		echo '<script type="text/javascript">alert('+$message+')</script>';
+	}
+	
+	public function getDegree(){
+		if($this->session->userdata('loggedin')==NULL)
+			redirect('home');
+		$res = $this->sp('GetDegree');
+		$data = $res -> result();
+		$this->load->view('json_view', array('json' => $data));
+	}
+	public function getCategory(){
+		if($this->session->userdata('loggedin')==NULL)
+			redirect('home');
+		$res = $this->sp('GetCategory');
+		$data = $res -> result();
+		$this->load->view('json_view', array('json' => $data));
+	}
+	public function getCategoryByDegreeID(){
+		if($this->session->userdata('loggedin')==NULL)
+			redirect('home');
+		$post = $this->rest->post();
+		$res = $this->sp('GetCategoryByDegreeID', array(
+			'DegreeID' => $post->DegreeID
+		));
+		$data = $res->result();
+		$this->load->view('json_view', array('json' => $data));
+	}
+	public function getLevel(){
+		if($this->session->userdata('loggedin')==NULL)
+			redirect('home');
+		$res = $this->sp('GetLevel');
+		$data = $res -> result();
+		$this->load->view('json_view', array('json' => $data));
 	}
 }
 

@@ -243,6 +243,9 @@ $(document).ready(function(){
 					console.log(data);
 					curTestID = data;
 					alert('Test created successfully.');
+					
+					$(".createTest").slideUp();
+					$(".listQuestion").slideDown();
 				}	
 			});
 		}
@@ -312,7 +315,7 @@ $(document).ready(function(){
 
 function loadDegree(){
 	AB.ajax({
-		url: AB.serviceUri + 'backend/getDegree',
+		url: AB.serviceUri + 'createtest/getDegree',
 		type: 'post',
 		dataType: 'json',
 		contentType: 'application/json;charset=utf-8',
@@ -330,7 +333,7 @@ function loadDegree(){
 
 function loadLevel(){
 	AB.ajax({
-		url: AB.serviceUri + 'backend/getLevel',
+		url: AB.serviceUri + 'createtest/getLevel',
 		type: 'post',
 		dataType: 'json',
 		contentType: 'application/json;charset=utf-8',
@@ -349,7 +352,7 @@ function loadLevel(){
 function loadCategory(){
 	
 	AB.ajax({
-		url: AB.serviceUri + 'backend/getCategory',
+		url: AB.serviceUri + 'createtest/getCategory',
 		type: 'post',
 		dataType: 'json',
 		contentType: 'application/json;charset=utf-8',
