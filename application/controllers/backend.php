@@ -40,6 +40,7 @@ class BackEnd extends AB_Controller {
 		$this->load->view('json_view', array('json' => $data));
    }
    public function getCategoryByDegreeID(){
+		// asdf
 		$post = $this->rest->post();
 		$res = $this->sp('GetCategoryByDegreeID', array(
 			'DegreeID' => $post->DegreeID
