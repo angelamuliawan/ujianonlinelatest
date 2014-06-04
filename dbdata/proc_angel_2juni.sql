@@ -91,7 +91,7 @@ GO
 -- Create date: 2 Juni 2014
 -- Description:	Get Passed Test
 -- =============================================
-ALTER PROCEDURE [dbo].[GetPassedTest] 2
+CREATE PROCEDURE [dbo].[GetPassedTest]
 @userid int 
 AS
 BEGIN
@@ -122,3 +122,35 @@ BEGIN
 	GROUP BY t.TestID, TestName, DegreeName, CategoryName, ua.AuditedTime, LevelName
 END
 GO
+
+-- =============================================  
+-- Author  : Brian Alexandro    
+-- Create date : 04 May 2014  
+-- Description : Get list item per category  
+-- =============================================  
+ALTER PROCEDURE GetListItemPerCategory  1
+ -- Add the parameters for the stored procedure here  
+ @CategoryID int  
+AS  
+BEGIN  
+ -- SET NOCOUNT ON added to prevent extra result sets from  
+ -- interfering with SELECT statements.  
+ SET NOCOUNT ON;  
+  
+    -- Insert statements for procedure here  
+ SELECT  
+  t.TestID,  
+  TestName,  
+  TestDescription,  
+  PassedBy = COUNT(ua.UserID)  
+ FROM  
+  Test t
+ LEFT JOIN UserAnswer ua on ua.TestID = t.TestID
+ WHERE  
+  CategoryID = @CategoryID AND  
+  t.AuditedActivity <> 'D'  
+ GROUP BY  
+  t.TestID,  
+  TestName,  
+  TestDescription  
+END  
