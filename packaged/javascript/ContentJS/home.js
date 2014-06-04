@@ -47,7 +47,7 @@ $(document).ready(function(){
 					else 
 					{
 						$("#errorLogin").text("");
-						$.session.set('userlogin',  $("#loginusername").val());
+						$.session.set('userlogin', 'loggedin');
 						window.location.href= AB.dashboardUri;
 					}
 				}	
@@ -56,7 +56,7 @@ $(document).ready(function(){
 	});
 
 	$(".btnLogout").click(function(){
-		$.session.set('userlogin', false);
+		$.session.set('userlogin', '');
 		window.location.href= AB.serviceUri+'home/doLogout';
 	});
 });
@@ -77,9 +77,12 @@ function loadTopTest(){
 						data[i].CategoryName+' - ' + data[i].DegreeName+
 						'<div class="right floated">'+data[i].NumberOfPeople+' people did</div>'+
 					'</div>');
-				if(data[i].LevelID == 1) $(".checkmark").addClass('green');
-				else if (data[i].LevelID == 2) $(".checkmark").addClass('blue');
-				else $(".checkmark").addClass('red');
+				if(data[i].LevelID == 1) 
+					$(".checkmark").addClass('green');
+				else if(data[i].LevelID == 2) 
+					$(".checkmark").addClass('blue');
+				else 
+					$(".checkmark").addClass('red');
 			}
 		}
 	});

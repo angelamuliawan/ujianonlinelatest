@@ -50,8 +50,8 @@ class Home extends AB_Controller {
 		redirect('home');
 	}
 	public function loadTopTest(){
-   		if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
-			redirect('home');
+   		// if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			// redirect('home');
 		$res = $this->sp('GetTopTest');
 		$data = $res -> result();
 		$this->load->view('json_view', array('json' => $data));
