@@ -53,7 +53,7 @@ $(document).ready(function(){
 		dataType: 'json',
 		contentType: 'application/json;charset=utf-8',
 		success:function(data){
-			for(var i = 0; i < data.length; i++)
+			for(var i = 0; i < 5; i++)
 			{
 				var tmp = $("#iTemplateDegree").clone().removeAttr("id").addClass("datarow").css('display','');
 				$(tmp).attr('data-id',data[i].DegreeID);

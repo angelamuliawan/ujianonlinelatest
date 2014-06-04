@@ -100,7 +100,7 @@
       <a class="right popup item" href="<?=$domain?>" data-content="Home">
         <i class="home icon"></i>
       </a>
-      <a class="right launch item">
+      <a class="right launch item" href="<?=$domain?>/whatisbaz">
           What is BAZ?
       </a>
       <?php if($this->session->userdata('loggedin')!=NULL) { ?>

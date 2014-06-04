@@ -23,7 +23,7 @@
           	<div class="hidden content">Register</div>
         </div>
         <?php } ?>
-        <div class="large basic inverted animated fade ui button">
+        <div class="large basic inverted animated fade ui button whatisbaz">
           <div class="visible content">What is BAZ</div>
           <div class="hidden content">?</div>
         </div>

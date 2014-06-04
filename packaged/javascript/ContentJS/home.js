@@ -27,6 +27,9 @@ $(document).ready(function(){
     }
    });
 
+	$('.whatisbaz').click(function(){
+		window.location.href =mainDomain+'/whatisbaz';
+	});
 
 	$('#btnLogin').click(function(){
 		if(!($('#formLogin .field').hasClass('error')))
@@ -81,8 +84,7 @@ function loadTopTest(){
 					$(".checkmark").addClass('green');
 				else if(data[i].LevelID == 2) 
 					$(".checkmark").addClass('blue');
-				else 
-					$(".checkmark").addClass('red');
+				else if(data[i].LevelID == 3) $(".checkmark").addClass('red');
 			}
 		}
 	});
