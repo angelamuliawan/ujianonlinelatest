@@ -106,10 +106,63 @@
 			<!--End Of Category Section-->
 		</div>
 		<div class="ui tab segment" data-tab="user">
-
+			<h4>User</h4>
+			<table class="ui table segment" id="tblUser" width="50">
+			  	<thead>
+				    <tr>
+				    	<th>Username</th>
+				    	<th>Fullname</th>
+				    	<th>Email</th>
+				    	<th>Type</th>
+				    	<th>Total Created</th>
+						<th>Total Passed</th>
+					    <th>Action</th>
+				  	</tr>
+				</thead>
+				<tbody>
+					<tr id="iTemplateUser"style="display:none" class="loop">
+						<td class="iUserID" style="display:none"></td>
+						<td class="iUsername"></td>
+						<td class="iFullName"></td>
+						<td class="iEmail"></td>
+						<td class="iType"></td>
+						<td class="iCount1"></td>
+						<td class="iCount2"></td>
+						<td class="iActionCat">
+							<i class="trash icon btnDeleteUser link"></i>
+						</td>
+					</tr>
+				 </tbody>
+			</table>
 		</div>
 		<div class="ui tab segment" data-tab="test">
-
+			<table class="ui table segment" id="tblCreationTest" width="50">
+			  	<thead>
+				    <tr>
+				    	<th>Publish On</th>
+					    <th>Test Name</th>
+					    <th>Degree</th>
+					    <th>Category</th>
+					     <th>Level</th>
+					    <th>Type</th>
+					    <th>Number Of People</th>
+					    <th>Delete</th>
+				  	</tr>
+				</thead>
+				<tbody>
+					<tr id="iTemplateCreTest" style="display:none" class="loop">
+						<td class="iTestID" style="display:none"></td>
+						<td class="iPublish"></td>
+						<td class="iTestName"></td>
+						<td class="iDegree"></td>
+						<td class="iCategory"></td>
+						<td class="iLevel"></td>
+						<td class="iType"></td>
+						<td class="iNumberOfPeople" style="width:50px;"></i></td>
+						<td><i class="trash icon btnDeleteTest link"></i></td>
+					</tr>
+				 </tbody>
+			</table>
 		</div>
 
 		<!-- End Of Content -->

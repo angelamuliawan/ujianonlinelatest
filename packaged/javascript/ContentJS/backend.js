@@ -3,6 +3,8 @@ $(document).ready(function(){
 	loadDegree();
 	loadLevel();
 	loadCategory();
+	loadUser();
+	loadTest();
 
 	$('.demo.menu .item').tab(); //to activate the tab menu
 
@@ -115,6 +117,36 @@ $(document).ready(function(){
 		});
 	});
 
+	$("body").on('click', '.btnDeleteUser', function(){
+		var UserID = $(this).closest("tr").find("td.iUserID").text();
+		var input = {UserID : UserID}
+		AB.ajax({
+		url: AB.serviceUri + 'backend/deleteUser',
+		type: 'post',
+		dataType: 'json',
+		data:JSON.stringify(input),
+		contentType: 'application/json;charset=utf-8',
+		success:function(data){
+				loadUser();
+			}	
+		});
+	});
+
+	$("body").on('click', '.btnDeleteTest', function(){
+		var TestID = $(this).closest("tr").find("td.iTestID").text();
+		var input = {TestID : TestID}
+		AB.ajax({
+		url: AB.serviceUri + 'backend/deleteTest',
+		type: 'post',
+		dataType: 'json',
+		data:JSON.stringify(input),
+		contentType: 'application/json;charset=utf-8',
+		success:function(data){
+				loadTest();
+			}	
+		});
+	});
+
 	$("body").on('click', '.btnEditCategory', function(){
 		var CategoryName = $(this).closest("tr").find("td.iCategoryName").text();
 		$(this).closest("tr").find("td.iCategoryName").empty().append("<div class='ui input'><input type='text' class='txtCategory' placeholder='Input Category Name' value='"+CategoryName+"'/></div>")
@@ -220,6 +252,60 @@ function loadCategory(){
 			$("#tblCategory tbody").append(tmp);
 			
 			$('.ui.selection.dropdown').dropdown();
+		}
+	});
+}
+
+function loadUser(){
+	AB.ajax({
+		url: AB.serviceUri + 'backend/GetUserAndAnswer',
+		type: 'post',
+		dataType: 'json',
+		contentType: 'application/json;charset=utf-8',
+		success:function(dataTemp){
+			var table = $("#tblUser");
+			$("tbody",table).find("tr").not("#iTemplateUser").remove();
+			for(var i = 0; i<dataTemp.length; i++)
+			{
+				var newRow = $("#iTemplateUser",table).clone().css("display","").removeAttr("id");
+				$(".iUserID",newRow).text(dataTemp[i].UserID);
+				$(".iUsername",newRow).text(dataTemp[i].UserName);
+				$(".iFullName",newRow).text(dataTemp[i].FullName);
+				$(".iEmail",newRow).text(dataTemp[i].Email);
+				$(".iType",newRow).text(dataTemp[i].UserType);
+				$(".iCount1",newRow).text(dataTemp[i].CreateTest);
+				$(".iCount2",newRow).text(dataTemp[i].PassedTest);
+				$("tbody",table).append(newRow);
+			}
+		}
+	});
+	
+}
+
+function loadTest(){
+	AB.ajax({
+		url: AB.serviceUri + 'backend/GetAllTest',
+		type: 'post',
+		dataType: 'json',
+		contentType: 'application/json;charset=utf-8',
+		success:function(data){
+			var table = $("#tblCreationTest");
+			var access;
+			$("tbody",table).find("tr").not("#iTemplateCreTest").remove();
+			for(var i = 0; i<data.length; i++)
+			{
+				access = (data[i].AccessType == 1)?('Private'):('Public');
+				var newRow = $("#iTemplateCreTest",table).clone().css("display","").removeAttr("id");
+				$(".iTestID",newRow).text(data[i].TestID);
+				$(".iPublish",newRow).text(data[i].PublishDate);
+				$(".iTestName",newRow).text(data[i].TestName);
+				$(".iDegree",newRow).text(data[i].DegreeName);
+				$(".iCategory",newRow).text(data[i].CategoryName);
+				$(".iLevel",newRow).text(data[i].LevelName);
+				$(".iType",newRow).text(access);
+				$(".iNumberOfPeople",newRow).text(data[i].NumberOfPeople);
+				$("tbody",table).append(newRow);
+			}
 		}
 	});
 }

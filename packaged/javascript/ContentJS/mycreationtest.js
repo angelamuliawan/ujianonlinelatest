@@ -20,12 +20,10 @@ $(document).ready(function(){
 					$(".iType",newRow).text(data[i].Type);
 					$(".iNumber",newRow).text(data[i].RightTotalAnswer);
 					$("tbody",table).append(newRow);
-
 				}
 			}
 		});
 	})
-
 });
 
 function loadCreationTest()

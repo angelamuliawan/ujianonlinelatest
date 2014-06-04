@@ -26,6 +26,11 @@ class ListCategory extends AB_Controller {
 		$this->load->view('master/master',
 				array('pageContent'=>$pageContent));
 	}
+	public function getCategoryPerDegree(){
+		$res = $this->sp('GetCategoryPerDegree');
+		$data = $res -> result();
+		$this->load->view('json_view', array('json' => $data));
+   }
 }
 
 /* End of file welcome.php */

@@ -28,8 +28,6 @@ class BackEnd extends AB_Controller {
 				array('pageContent'=>$pageContent));
 	}
 	public function getDegree(){
-		if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
-			redirect('home');
 		$res = $this->sp('GetDegree');
 		$data = $res -> result();
 		$this->load->view('json_view', array('json' => $data));
@@ -55,6 +53,27 @@ class BackEnd extends AB_Controller {
    		if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
 			redirect('home');
 		$res = $this->sp('GetLevel');
+		$data = $res -> result();
+		$this->load->view('json_view', array('json' => $data));
+   }
+      public function GetUserAndTest(){
+   		if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
+		$res = $this->sp('GetUserAndTest');
+		$data = $res -> result();
+		$this->load->view('json_view', array('json' => $data));
+   }
+   public function GetUserAndAnswer(){
+   		if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
+		$res = $this->sp('GetUserAndAnswer');
+		$data = $res -> result();
+		$this->load->view('json_view', array('json' => $data));
+   }
+   public function GetAllTest(){
+   		if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
+		$res = $this->sp('GetAllTest');
 		$data = $res -> result();
 		$this->load->view('json_view', array('json' => $data));
    }
@@ -147,6 +166,28 @@ class BackEnd extends AB_Controller {
    		$post = $this->rest->post();
 		$res = $this->sp('DeleteCategory', 
 				array('CategoryID' => $post->CategoryID,
+					'AuditedUser' => $this->session->userdata('username')
+			));
+		$data = $res->result();
+		$this->load->view('json_view', array('json' => $data));
+   }
+    public function deleteUser(){
+    	if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
+   		$post = $this->rest->post();
+		$res = $this->sp('DeleteUser', 
+				array('UserID' => $post->UserID,
+					'AuditedUser' => $this->session->userdata('username')
+			));
+		$data = $res->result();
+		$this->load->view('json_view', array('json' => $data));
+   }
+    public function deleteTest(){
+    	if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
+			redirect('home');
+   		$post = $this->rest->post();
+		$res = $this->sp('DeleteTest', 
+				array('TestID' => $post->TestID,
 					'AuditedUser' => $this->session->userdata('username')
 			));
 		$data = $res->result();
