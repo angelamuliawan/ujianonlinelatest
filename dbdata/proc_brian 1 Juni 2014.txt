@@ -1,0 +1,49 @@
+USE [ujianonline]
+GO
+/****** Object:  StoredProcedure [dbo].[InsertTest]    Script Date: 06/02/2014 08:12:26 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[InsertTest]
+	-- Add the parameters for the stored procedure here
+	@TestName varchar(30), 
+	@TestDescription varchar(100),
+	@CategoryID int, 
+	@LevelID int, 
+	@DegreeID int, 
+	@UserID int, 
+	@AccessType int, --  0 public, 1 private
+	@PublishStartDate datetime,
+	@PublishEndDate datetime,
+	@UploadTutorial varchar(100),
+	@AuditedUser varchar(20)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO [Test] VALUES 
+	(
+		@TestName, 
+		@TestDescription,
+		@CategoryID, 
+		@LevelID, 
+		@AccessType, --  0 public, 1 private
+		@UserID, 
+		@PublishStartDate,
+		@PublishEndDate,
+		@UploadTutorial,
+		@AuditedUser, 
+		'A', 
+		GETDATE(),
+		@DegreeID
+	)
+END

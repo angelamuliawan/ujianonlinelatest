@@ -35,6 +35,11 @@ $(document).ready(function(){
       }
     ;
 
+	$('.ui.dropdown')
+      .dropdown({
+        on: 'hover'
+      })
+    ;
     $('.ui.accordion').accordion();
     $('.ui.form').form(validationRules, {on: 'blur'});
     $('.masthead .information').transition('scale in');
