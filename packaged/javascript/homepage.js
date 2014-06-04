@@ -47,25 +47,23 @@ $(document).ready(function(){
 	
 	
 	// our code goes here
-	if($.session.get('userlogin') !== undefined){
-		AB.ajax({
-			url: AB.serviceUri + 'backend/getDegree',
-			type: 'post',
-			dataType: 'json',
-			contentType: 'application/json;charset=utf-8',
-			success:function(data){
-				for(var i = 0; i < data.length; i++)
-				{
-					var tmp = $("#iTemplateDegree").clone().removeAttr("id").addClass("datarow").css('display','');
-					$(tmp).attr('data-id',data[i].DegreeID);
-					$(".iDegree",tmp).after(data[i].DegreeName);
-					$(".iContainerDegree").append(tmp);
-					
-					//console.log(tmp);
-				}
+	AB.ajax({
+		url: AB.serviceUri + 'backend/getDegree',
+		type: 'post',
+		dataType: 'json',
+		contentType: 'application/json;charset=utf-8',
+		success:function(data){
+			for(var i = 0; i < data.length; i++)
+			{
+				var tmp = $("#iTemplateDegree").clone().removeAttr("id").addClass("datarow").css('display','');
+				$(tmp).attr('data-id',data[i].DegreeID);
+				$(".iDegree",tmp).after(data[i].DegreeName);
+				$(".iContainerDegree").append(tmp);
+				
+				//console.log(tmp);
 			}
-		});
-	}
+		}
+	});
 	
 	$("body").on('click', '.title.datarow', function(e){
 		$(".title.datarow.active").removeClass('active');
