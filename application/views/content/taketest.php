@@ -57,7 +57,7 @@
 					</div>
 				</div>
 				
-				<div class="ui blue button small" id="btnSaveAllQuestion">Finalize Answer</div>
+				<div class="ui blue button small" id="btnFinalizeAnswer">Finalize Answer</div>
 			</form>
     	</div>
 		<!-- End Of Content -->

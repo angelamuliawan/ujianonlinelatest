@@ -41,8 +41,6 @@ class BackEnd extends AB_Controller {
    }
    public function getCategoryByDegreeID(){
 		$post = $this->rest->post();
-   		if($this->session->userdata('loggedin')==NULL || $this->session->userdata('userrole')!=1)
-			redirect('home');
 		$res = $this->sp('GetCategoryByDegreeID', array(
 			'DegreeID' => $post->DegreeID
 		));
