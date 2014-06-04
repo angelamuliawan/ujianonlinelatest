@@ -130,7 +130,7 @@
       <a href="<?=$domain?>/dashboard" class="item">My Dashboard</a>
       <a href="<?=$domain?>/createtest" class="item">Create Test</a>
       <a href="<?=$domain?>/mycreationtest" class="item">My Creation Test</a>
-      <a href="#" class="item">My Passed Test</a>
+      <a href="<?=$domain?>/mypassedtest" class="item">My Passed Test</a>
       <?php if($this->session->userdata('userrole')==1) { ?>
       <a href="<?=$domain?>/backend" class="item">Manage Content</a>
       <?php } ?>

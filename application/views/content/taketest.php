@@ -56,7 +56,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="ui blue button small" id="btnFinalizeAnswer">Finalize Answer</div>
 			</form>
     	</div>

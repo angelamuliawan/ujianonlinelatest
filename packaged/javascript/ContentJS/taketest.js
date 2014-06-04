@@ -1,10 +1,14 @@
 var objTestDetail = new Array();
 var objTestDetailAnswer = new Array();
-var curTestID = 0;
+var TestID = 0;
 var TestName = '';
+var email = null;
+var isInvited = 0;
+var objUserAnswerDetail = new Array();
+
 $(document).ready(function(){
 	
-	var TestID = $("#hdnTestID").val();
+	TestID = $("#hdnTestID").val();
 	
 	$('.ui.checkbox').checkbox();
 	// question event
@@ -19,6 +23,7 @@ $(document).ready(function(){
 			for(var i = 0; i < data.length; i++)
 			{
 				objTestDetail.push({
+					'TestDetailID' : data[i].TestDetailID,
 					'QuestionDescription' : data[i].TestQuestion
 				});
 			}
@@ -39,6 +44,7 @@ $(document).ready(function(){
 							objTestDetailAnswer[counter] = new Array();
 						}
 						objTestDetailAnswer[counter].push({
+							'TestDetailAnswerID' : data[i].TestDetailAnswerID,
 							'OptionDescription' : data[i].TestDetailAnswerName,
 							'OptionURL' : data[i].TestDetailURL
 						});
@@ -49,15 +55,15 @@ $(document).ready(function(){
 						var tmp = $("#iTemplateQuestion").clone().removeAttr("id").addClass("datarow").css('display','');
 						
 						// set number of question
-						$(".ui.header", tmp).text("Question No. " + (i+1));
+						$(".ui.header", tmp).text("Question No. " + (i+1)).attr('data-id', objTestDetail[i].TestDetailID);
 						
 						$("#txtTestQuestion", tmp).attr('name', 'question_desc' + (i+1));
 						$("#txtTestQuestion", tmp).append(objTestDetail[i].QuestionDescription);
 						
-						$(".radio.optionA", tmp).attr('name','answer' + (i+1));
-						$(".radio.optionB", tmp).attr('name','answer' + (i+1));
-						$(".radio.optionC", tmp).attr('name','answer' + (i+1));
-						$(".radio.optionD", tmp).attr('name','answer' + (i+1));
+						$(".radio.optionA", tmp).attr('name','answer' + (i+1)).val(objTestDetailAnswer[i+1][0]['TestDetailAnswerID']);
+						$(".radio.optionB", tmp).attr('name','answer' + (i+1)).val(objTestDetailAnswer[i+1][1]['TestDetailAnswerID']);
+						$(".radio.optionC", tmp).attr('name','answer' + (i+1)).val(objTestDetailAnswer[i+1][2]['TestDetailAnswerID']);
+						$(".radio.optionD", tmp).attr('name','answer' + (i+1)).val(objTestDetailAnswer[i+1][3]['TestDetailAnswerID']);
 						
 						$(".questionOptionA", tmp).attr('name', 'question'+(i+1)+'_OptionA');
 						$(".questionOptionB", tmp).attr('name', 'question'+(i+1)+'_OptionB');
@@ -69,8 +75,12 @@ $(document).ready(function(){
 						$(".questionOptionC",tmp).val(objTestDetailAnswer[i+1][2]['OptionDescription']);
 						$(".questionOptionD",tmp).val(objTestDetailAnswer[i+1][3]['OptionDescription']);
 						
-						$("#btnSaveAllQuestion").before(tmp);
+						$("#btnFinalizeAnswer").before(tmp);
 						$('.ui.checkbox').checkbox();
+					}
+					
+					if($.session.get('userlogin') === undefined){
+						$("#btnFinalizeAnswer").before('<input type="text" id="txtEmail" placeholder="Input email ...">');
 					}
 				}
 			});
@@ -78,95 +88,57 @@ $(document).ready(function(){
 	});
 	
 	$("#btnFinalizeAnswer").click(function(){
-		var counter = 0;
-		objTestDetail = new Array();
-		objTestDetailAnswer = new Array();
+	
+		// set user email, if loggedin, then set to null
+		if($.session.get('userlogin') === undefined){
+			email = $("#txtEmail").val();
+			isInvited = 1; // for public, 1 for private
+		}
+		objUserAnswerDetail = new Array();
 		$(".column.datarow").each(function(){
 			var tmp = $(this);
 			
-			// get question description
-			var question = $("input[name='question_desc"+(counter+1)+"']").val();
-			// if question contain uploaded file, temporary
-			var testURL = 'N/A';
+			var TestDetailID = $(".ui.header", tmp).attr('data-id');
+			var TestDetailAnswerID = $(".radio :checked", tmp).val();
 			
-			// get option description
-			var optionA_description = $(".questionOptionA", tmp).val();
-			var optionB_description = $(".questionOptionB", tmp).val();
-			var optionC_description = $(".questionOptionC", tmp).val();
-			var optionD_description = $(".questionOptionD", tmp).val();
-			
-			// get option value, this will determine which answer is right or wrong
-			// 1 is true, 0 is false.
-			var optionA_value = $(".radio.optionA", tmp).val();
-			var optionB_value = $(".radio.optionB", tmp).val();
-			var optionC_value = $(".radio.optionC", tmp).val();
-			var optionD_value = $(".radio.optionD", tmp).val();
-			
-			// get optionURI
-			var optionA_URL = 'N/A';
-			var optionB_URL = 'N/A';
-			var optionC_URL = 'N/A';
-			var optionD_URL = 'N/A';
-			
-			objTestDetail.push({
-				'TestQuestion' : question,
-				'TestURL' : testURL
+			objUserAnswerDetail.push({
+				'TestDetailID' : TestDetailID,
+				'TestDetailAnswerID' : TestDetailAnswerID
 			});
-			
-			objTestDetailAnswer[counter] = new Array();
-			// push option A			
-			objTestDetailAnswer[counter].push({
-				'TestDetailAnswerName' : optionA_description,
-				'TestDetailURL' : optionA_URL,
-				'isAnswer' : optionA_value,
-				'option' : 'A'
-			});
-			
-			// push option B			
-			objTestDetailAnswer[counter].push({
-				'TestDetailAnswerName' : optionB_description,
-				'TestDetailURL' : optionB_URL,
-				'isAnswer' : optionB_value,
-				'option' : 'B'
-			});
-			
-			// push option C			
-			objTestDetailAnswer[counter].push({
-				'TestDetailAnswerName' : optionC_description,
-				'TestDetailURL' : optionC_URL,
-				'isAnswer' : optionC_value,
-				'option' : 'C'
-			});
-			
-			// push option D			
-			objTestDetailAnswer[counter].push({
-				'TestDetailAnswerName' : optionD_description,
-				'TestDetailURL' : optionD_URL,
-				'isAnswer' : optionD_value,
-				'option' : 'D'
-			});
-			counter++;
 		});
-		
+
 		var objParam = {
-			listTestDetail : objTestDetail,
-			listTestDetailAnswer : objTestDetailAnswer,
-			TestID : curTestID
+			listUserAnswerDetail : objUserAnswerDetail,
+			TestID : TestID,
+			email : email,
+			isInvited : isInvited
 		}
 		
+		
 		AB.ajax({
-			url: AB.serviceUri + 'createtest/insertTestDetail',
+			url: AB.serviceUri + 'taketest/insertUserAnswer',
 			type: 'post',
 			dataType: 'json',
 			data:JSON.stringify(objParam),
 			contentType: 'application/json;charset=utf-8',
 			success:function(data){
-				alert("Test successfully created.");
+				alert("Your answer was successfully submitted");
+				AB.ajax({
+					url: AB.serviceUri + 'taketest/checkUserAnswer',
+					type: 'post',
+					dataType: 'json',
+					data:JSON.stringify({ TestID : TestID, email : email}),
+					contentType: 'application/json;charset=utf-8',
+					success:function(data){
+						console.log(data[0])
+						var split = data[0].RightTotalAnswer.split('/');
+						alert("Your total right answer is " + split[0] + ' out of ' + split[1] + ' question.');
+						location.href = AB.serviceURI + 'mypaseedtest';
+					}	
+				});
 			}	
 		});
-		
-		//console.log(objTestDetail);
-		//console.log(objTestDetailAnswer);
+
 	});
 	
 });

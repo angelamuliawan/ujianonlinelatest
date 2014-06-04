@@ -12,9 +12,9 @@
 <div class="segment">
 	<div class="container">
 		<!-- Title -->
-		<h2 class="ui dividing header">Create Test</h2>
+		<h2 class="ui dividing header createTest">Create Test</h2>
 	  	<!-- Content -->
-	  	<div class="ui form segment">
+	  	<div class="ui form segment createTest">
 			<form id="formCreateTest">
 				<div class="field">
 					<label>Test Name</label>
@@ -119,16 +119,10 @@
 		<!-- End Of Content -->
 		
 		<!-- Title -->
-		<h2 class="ui dividing header">Step 2</h2>
+		<h2 class="ui dividing header listQuestion" style="display:none;">List Question</h2>
 	  	<!-- Content -->
-	  	<div class="ui form segment">
+	  	<div class="ui form segment listQuestion" style="display:none;">
 			<form id="formQuestion">
-				<div class="field">
-					<label>Test Name</label>
-					<div class="ui left labeled input">
-					  <input placeholder="Type your test name here..." type="text" name="testname" id="testname">
-					</div>
-				</div>
 				
 				<!-- template, not displayed -->
 				<div class="column iTemplateQuestion" style="display:none;">

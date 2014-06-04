@@ -43,6 +43,41 @@ class TakeTest extends AB_Controller {
 		$data = $res->result();
 		$this->load->view('json_view', array('json' => $data));
 	}
+	
+	public function insertUserAnswer(){
+		$post = $this->rest->post();
+		$listUserAnswerDetail = $post->listUserAnswerDetail;
+		$UserAnswerID = $this->sp('InsertUserAnswer',
+				array(
+					'TestID'=> $post->TestID, 
+					'isInvited' => $post->isInvited,
+					'UserID' => $this->session->userdata('userid'),
+					'UserEmail' => $post->email,
+					'AuditedUser' => $this->session->userdata('username')
+		))->result()[0]->ID;
+		
+		for($i = 0; $i < count($listUserAnswerDetail); $i++){
+			$this->sp('InsertUserAnswerDetail',
+				array(
+					'UserAnswerID'=> $UserAnswerID,
+					'TestDetailID' => $listUserAnswerDetail[$i]->TestDetailID,
+					'TestDetailAnswerID' => $listUserAnswerDetail[$i]->TestDetailAnswerID,
+					'AuditedUser' => $this->session->userdata('username')
+			))->result();
+		}
+		$this->load->view('json_view', array('json' => 1));
+	}
+	
+	public function checkUserAnswer(){
+		$post = $this->rest->post();
+		$res = $this->sp('CheckUserAnswer', array(
+			'TestID' => $post->TestID,
+			'UserID' => $this->session->userdata('userid'),
+			'Email' => $post->email
+		));
+		$data = $res->result();
+		$this->load->view('json_view', array('json' => $data));
+	}
 
 	public function insertTestDetail(){
 		$post = $this->rest->post();
