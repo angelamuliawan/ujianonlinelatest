@@ -4,7 +4,7 @@
 ?>
 <style>
 </style>
-<input type="hidden" id="hdnCategoryID" />
+<input type="hidden" id="hdnCategoryID" value="<?php echo $CategoryID;?>" />
 <script src="<?=$domain?>/packaged/javascript/ContentJS/listitempercategory.js"></script>
 <div class="segment">
 	<div class="container">
@@ -16,16 +16,14 @@
 	  	<!-- Content -->
 		<div class="ui list">
 		  <div class="item">
-		    <div class="header">Degree:</div>
-		   	University
+		    <div id="passedDegree" class="header">Degree :</div>
 		  </div>
 		  <div class="item">
-		    <div class="header">Category:</div>
-		    Anapersis
+		    <div id="passedCategory" class="header">Category :</div>
 		  </div>
 		 </div>
 		 <!--Table -->
-		 <table class="ui table segment">
+		 <table class="ui table segment" id="tableListItemPerCategory">
 		  	<thead>
 			    <tr>
 			    	<th>Name</th>
@@ -34,21 +32,14 @@
 			  	</tr>
 			</thead>
 			<tbody>
-			    <tr>
-			      <td>
-			      	<a href="#">Latihan UTS</a>
-			      </td>
-			      <td>Anapersis kisi2 uts</td>
-			      <td>100 people</td>
+			    <tr id="iListTemplate" style="display:none;">
+					<td>
+						<a href="#" class="iTestName"></a>
+					</td>
+					<td class="iTestDescription"></td>
+					<td class="iTotalPassedBy"></td>
 			    </tr>
-			    <tr>
-			      <td>
-			      	<a href="#">Compiler Step</a>
-			      </td>
-			      <td>kisi2 uts tekom</td>
-			      <td>500 people</td>
-			    </tr>
-			  </tbody>
+			</tbody>
 		</table>
 		<!-- End Of Table -->
 		<!-- End Of Content -->
