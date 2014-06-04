@@ -24,6 +24,7 @@ $(document).ready(function(){
 			for(var i = 0; i < data.length; i++){
 				var tmp = $("#iListTemplate").clone().removeAttr('id').addClass('datarow').css('display','');
 				$(".iTestName",tmp).text(data[i].TestName);
+				$(".iTestName",tmp).attr('href',mainDomain+'/taketest/index/' + data[i].TestID);
 				$(".iTestDescription",tmp).text(data[i].TestDescription);
 				$(".iTotalPassedBy",tmp).text(data[i].PassedBy);
 				
